@@ -17,7 +17,7 @@ def about(request):
 
 @login_required
 def notes_index(request):
-  notes = Note.objects.all()
+  notes = Note.objects.filter(user=request.user)
   return render(request, 'notes/index.html', { 'notes': notes })
 
 @login_required
@@ -46,7 +46,7 @@ def signup(request):
 
 class NoteCreate(LoginRequiredMixin, CreateView):
   model = Note
-  fields = '__all__'
+  fields = ['name','notetype','content','date', 'color']
   success_url = '/notes/'
 
   def form_valid(self, form):
