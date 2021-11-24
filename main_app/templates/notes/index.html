@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/note-index.css' %}"/>
+{% endblock %}
+
+{% block content %}
+
+<section class="page-header">
+  <h1>Notes List</h1>
+</section>
+
+<section class="card-container">
+  {% for note in notes %}
+    <div class="card">
+      <a href="{% url 'notes_details' note.id %}">
+        <div class="card-content">
+          <div class="card-img-container">
+            note content here
+          </div>
+          <h2 class="card-title">{{ note.name }}</h2>
+          <p><small>{{ note.content }}</small></p>
+        </div>
+      </a>
+    </div>
+  {% endfor %}
+</section>
+
+{% endblock %}
