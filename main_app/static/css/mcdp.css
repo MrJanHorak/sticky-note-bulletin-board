@@ -1,0 +1,46 @@
+.mc-display__day {
+  font-size:clamp(1.6rem, 8vw, 2rem);
+}
+
+.mc-display__date {
+  font-size:clamp(8rem, 40vw, 11.2rem);
+}
+
+.mc-display__month {
+  font-size: clamp(1.9rem, 9vw, 2.4rem);
+}
+
+.mc-display__year {
+  font-size: clamp(3.8rem,18vw,4.8rem);
+}
+
+.mc-select__data--month, .mc-select__data--month span {
+  width: 40vw;
+  min-width: 8rem;
+  max-width: 10rem;
+}
+
+.mc-select__data--year, .mc-select__data--year span {
+  width: 22vw;
+  min-width: 4.8rem;
+  max-width: 5.6rem;
+}
+
+.mc-select__data {
+  font-size: clamp(1.6rem, 8vw, 2rem);
+}
+
+.mc-btn--danger,
+.mc-btn--success,
+.mc-date,
+.mc-table__weekday {
+  font-size: 1.6rem;
+}
+
+.mc-table__weekday {
+  padding: .5rem;
+}
+
+.mc-picker__footer {
+  padding: 1.6rem 0;
+}
