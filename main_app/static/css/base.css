@@ -1,5 +1,36 @@
 body {
   background-image: url("/static/images/corkboard-background-with-seamless-cork-texture.jpg");
   background-size: cover;
-  font-family: 'Covered By Your Grace', cursive;
+  font-family: 'Architects Daughter', cursive;
+}
+
+ul#navigation {
+  position: fixed;
+  margin: 0px;
+  padding: 0px;
+  top: 0px;
+  right: 200px;
+  list-style: none;
+  z-index:999999;
+}
+ul#navigation li {
+  display:inline;
+  float:left;
+  width:100px;
+  margin-left:1px;
+}
+ul#navigation li a {
+  display: block;
+  font-weight: bold;
+  text-shadow: 1px 1px 1px #fff;
+  float: left;
+  width: 100px;
+  height: 35px;
+  color: #603d05;
+  background: transparent url("/static/images/pngaaa.com-794390.png") no-repeat bottom right;
+  text-decoration:none;
+  text-align: center;
+  padding-top: 80px;
+  margin-top: -40px;
+  cursor: pointer;
 }

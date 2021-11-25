@@ -1,46 +1,46 @@
 {% load static %}
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Covered+By+Your+Grace&display=swap" rel="stylesheet">
-  <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap"
+  rel="stylesheet"
+/>
+<link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}" />
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link
-    rel="shortcut icon"
-    type="image/png"
-    href=""
-  >
-  <title>Sticky Note Bulletin Board</title>
-  {% block head %}
-  {% endblock %}
-</head>
-<body>
-  <header>
-    <div class="header-logo-container">
-
-    </div>
-    <nav>
-      <ul>
-      {% if user.is_authenticated %}  
-        <li><a href="{% url 'notes_index' %}">All {{user.username}}'s Notes</a></li>
-        <li><a href="{% url 'notes_create' %}">Add a Note</a></li>
-        <li><a href="{% url 'about' %}">About</a></li>
-        <li><a href="{% url 'logout' %}">Log out</a></li>
-      {% else %}
-        <li><a href="{% url 'about' %}">About</a></li>
-        <li><a href="{% url 'home' %}">Login</a></li>
-        <li><a href="{% url 'signup' %}">Sign Up</a></li>
-      {% endif %}
-      </ul>
-    </nav>
-  </header>
-  <main>
-    {% block content %}
-    {% endblock %}
-  </main>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" type="image/png" href="" />
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script defer src="{% static 'js/base-random-rotation.js' %}"></script>
+    <title>Sticky Note Bulletin Board</title>
+    {% block head %} {% endblock %}
+  </head>
+  <body>
+    <header>
+      <div class="header-logo-container"></div>
+      <nav>
+        <ul id="navigation">
+          {% if user.is_authenticated %}
+          <li class="index">
+            <a href="{% url 'notes_index' %}">All {{user.username}}'s Notes</a>
+          </li>
+          <li class="create-note">
+            <a href="{% url 'notes_create' %}">Add a Note</a>
+          </li>
+          <li class="about"><a href="{% url 'about' %}">About</a></li>
+          <li><a href="{% url 'logout' %}">Log out</a></li>
+          <li class="home"><a href="{% url 'home' %}">Home</a></li>
+          {% else %}
+          <li class="about"><a href="{% url 'about' %}">About</a></li>
+          <li class="home"><a href="{% url 'home' %}">Login</a></li>
+          <li class="signup"><a href="{% url 'signup' %}">Sign Up</a></li>
+          {% endif %}
+        </ul>
+      </nav>
+    </header>
+    <main>{% block content %} {% endblock %}</main>
+  </body>
 </html>
