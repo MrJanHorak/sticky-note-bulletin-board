@@ -1,0 +1,18 @@
+.stickynote-container {
+  display:flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.stickynote {
+  background-color: yellow;
+  width:250px;
+  min-height: 250px;
+  padding: 8px;
+  font-size:1.4em; 
+}
+
+a:link {
+  text-decoration: none;
+}

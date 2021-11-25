@@ -11,15 +11,15 @@
   <h1>Notes List</h1>
 </section>
 
-<section class="card-container">
+<section class="stickynote-container">
   {% for note in notes %}
-    <div class="card">
+    <div class="stickynote">
       <a href="{% url 'notes_detail' note.id %}">
-        <div class="card-content">
-          <div class="card-img-container">
+        <div class="stickynote-content">
+          <div class="stickynote-img-container">
 
           </div>
-          <h2 class="card-title">{{ note.name }}</h2>
+          <h2 class="stickynote-title">{{ note.name }}</h2>
           <p><small>{{ note.content }}</small></p>
         </div>
       </a>
