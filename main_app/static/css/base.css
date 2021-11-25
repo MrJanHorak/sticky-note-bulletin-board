@@ -18,13 +18,14 @@ ul#navigation li {
   float:left;
   width:100px;
   margin-left:1px;
+
 }
 ul#navigation li a {
   display: block;
   font-weight: bold;
   text-shadow: 1px 1px 1px #fff;
   float: left;
-  width: 100px;
+  width: 125px;
   height: 35px;
   color: #603d05;
   background: transparent url("/static/images/pngaaa.com-794390.png") no-repeat bottom right;
