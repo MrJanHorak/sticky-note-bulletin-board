@@ -27,7 +27,7 @@ class Note(models.Model):
     choices= NOTETYPE,
     default=NOTETYPE[1][0]
   )
-  content=models.TextField(max_length=300)
+  content=models.TextField(max_length=400)
   date=models.DateField('Due date')
   color=models.CharField(
     max_length=2,
