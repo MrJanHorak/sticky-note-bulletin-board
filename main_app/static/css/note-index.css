@@ -1,18 +1,18 @@
-.stickynote-container {
+/* .stickynote-container {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   gap: 10px;
-}
+} */
 
 .stickynote {
+  /* position: absolute; */
   line-height: 1;
   text-align: center;
   width: 275px;
   margin-left: 5px;
   min-height: 250px;
   max-height: auto;
-  position: relative;
   border: 1px solid #fde34e;
   font-size: 1.3em;
   border-bottom-right-radius: 50px 5px;
@@ -24,7 +24,6 @@
     #e7cd45 82%,
     #e7cdc5 100%
   ); /* W3C */
-
 }
 
 .stickynote:after {
@@ -40,6 +39,11 @@
   transform: matrix(-1, -0.1, 0, 1, 0, 0);
 }
 
+.page-header {
+  height: 45px;
+}
 a:link {
   text-decoration: none;
 }
+
+.draggable.is-dragging { opacity: 0.7; }

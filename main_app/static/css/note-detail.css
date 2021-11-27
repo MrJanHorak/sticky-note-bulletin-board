@@ -59,3 +59,22 @@ body {
   font-family: inherit;
   border: 0.5px solid #e7cd65;
 }
+
+.usr-img {
+  width: 100%;
+}
+
+.note-details h3 {
+  margin: 16px 0 10px 0;
+}
+
+#file-input {
+  overflow: hidden;
+  position: absolute;
+  width: .1px;
+  height: .1px;
+}
+
+#file-name {
+  margin-bottom: 10px;
+}

@@ -11,6 +11,9 @@ from django.contrib.auth.views import LoginView
 import uuid
 import boto3
 
+S3_BASE_URL = 'https://s3.us-east-1.amazonaws.com/'
+BUCKET = 'sicky-note-board-image-bucket'
+
 # Create your views here.
 def about(request):
   return render(request, 'about.html')
@@ -43,6 +46,23 @@ def signup(request):
   form = UserCreationForm()
   context = {'form': form, 'error_message': error_message}
   return render(request, 'signup.html', context)
+
+def add_photo(request, note_id):
+  photo_file = request.FILES.get('photo-file', None)
+  if photo_file:
+    s3 = boto3.client('s3')
+    key = uuid.uuid4().hex + photo_file.name[photo_file.name.rfind('.'):]
+    try:
+      s3.upload_fileobj(photo_file, BUCKET, key)
+      url = f"{S3_BASE_URL}{BUCKET}/{key}"
+      photo = Photo(url=url, note_id=note_id)
+      note_photo = Photo.objects.filter(note_id=note_id)
+      if note_photo.first():
+        note_photo.first().delete()
+      photo.save()
+    except Exception as err:
+      print('An error occurred uploading file to S3: %s' % err)
+  return redirect('notes_detail', note_id=note_id)
 
 class NoteCreate(LoginRequiredMixin, CreateView):
   model = Note

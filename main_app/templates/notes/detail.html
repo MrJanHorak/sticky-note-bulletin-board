@@ -12,11 +12,14 @@
 {% block content %}
 
 <section class="note-container">
-  <div class="note-img">
-    <img 
-      src="{% static 'images/' %}" 
-      alt=""
-    >
+<div class="note-img">
+    {% if note.photo.url %}
+      <img 
+        src="{{note.photo.url}}" 
+        alt="A photo of {{note.name}}"
+        class="usr-img"
+      >
+    {% endif %}
   </div>
   <div class="note-details">
     <h1>{{ note.name }}</h1>
@@ -25,6 +28,20 @@
       <a href="{% url 'notes_update' note.id %}" class="btn warn">Edit</a>
       <a href="{% url 'notes_delete' note.id %}" class="btn danger">Delete</a>
     </div>
+    <h3>Change photo</h3>
+    <p id="file-name"></p>
+    <form 
+      action="{% url 'add_photo' note.id %}"
+      enctype="multipart/form-data"
+      method="POST"
+    >
+      {% csrf_token %}
+      <label class="btn secondary">
+        Choose photo
+        <input type="file" name="photo-file" id="file-input">
+      </label>
+      <button type="submit" class="btn submit">Upload Photo</button>
+    </form>
   </div>
 </section>
 

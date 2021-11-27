@@ -3,28 +3,35 @@
 
 {% block head %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/note-index.css' %}"/>
+<script src="https://unpkg.com/draggabilly@2/dist/draggabilly.pkgd.min.js"></script>
+<script defer src="{% static 'js/draggability.js' %}"></script>
 {% endblock %}
 
 {% block content %}
-
 <section class="page-header">
-  <h1>Notes List</h1>
-</section>
 
+</section>
+<div id='board'>
 <section class="stickynote-container">
   {% for note in notes %}
       <a href="{% url 'notes_detail' note.id %}">
-    <div class="stickynote">
+    <div class="stickynote ui-widget-content draggable" id="draggable">
         <div class="stickynote-content">
           <div class="stickynote-img-container">
-
+          {% if note.photo.url %}
+              <img 
+                src="{{note.photo.url}}" 
+                alt="A photo for {{note.name}}"
+                class="usr-img"
+              >
+            {% endif %}
           </div>
-          <h2 class="stickynote-title">{{ note.name }}</h2>
+          <h3 class="stickynote-title">{{ note.name }}</h3>
           <p><small>{{ note.content }}</small></p>
         </div>
     </div>
       </a>
   {% endfor %}
 </section>
-
+</div>
 {% endblock %}

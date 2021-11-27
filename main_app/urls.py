@@ -10,4 +10,5 @@ urlpatterns = [
   path('notes/create/', views.NoteCreate.as_view(), name='notes_create'),
   path('notes/<int:pk>/update/', views.NoteUpdate.as_view(), name='notes_update'),
   path('notes/<int:pk>/delete/', views.NoteDelete.as_view(), name='notes_delete'),
+  path('notes/<int:photo_id>/add_photo/', views.add_photo, name='add_photo'),
 ]
