@@ -1,0 +1,16 @@
+.stickynote {
+  /* position: absolute; */
+  line-height: 1;
+  text-align: center;
+  width: 275px;
+  margin-left: 5px;
+  min-height: 250px;
+  max-height: auto;
+  border: 1px solid #fde34e;
+  font-size: 1.3em;
+  border-bottom-right-radius: 50px 5px;
+}
+
+.usr-img{
+  width: 90%;
+}

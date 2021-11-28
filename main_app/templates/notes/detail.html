@@ -7,11 +7,12 @@
   type="text/css" 
   href="{% static 'css/note-detail.css' %}"
 />
+<script defer src="{% static 'js/note-detail.js' %}"></script>
 {% endblock %}
 
 {% block content %}
-
-<section class="note-container">
+<h1>{{ note.color }}</h1>
+<section class="note-container" style="background-color: {{ note.color }}">
 <div class="note-img">
     {% if note.photo.url %}
       <img 

@@ -18,6 +18,10 @@ BUCKET = 'sicky-note-board-image-bucket'
 def about(request):
   return render(request, 'about.html')
 
+# def home(request):
+#   notes = Note.objects.filter(user=request.user)
+#   return render(request, '/home.html', { 'notes': notes })
+
 @login_required
 def notes_index(request):
   notes = Note.objects.filter(user=request.user)
@@ -45,6 +49,7 @@ def signup(request):
   # A bad POST or a GET request, so render signup.html with an empty form
   form = UserCreationForm()
   context = {'form': form, 'error_message': error_message}
+  
   return render(request, 'signup.html', context)
 
 def add_photo(request, note_id):
@@ -66,7 +71,7 @@ def add_photo(request, note_id):
 
 class NoteCreate(LoginRequiredMixin, CreateView):
   model = Note
-  fields = ['name','notetype','content','date', 'color']
+  fields = ['name','notetype','content','date', 'color','homescreen']
   success_url = '/notes/'
 
   def form_valid(self, form):
@@ -75,11 +80,13 @@ class NoteCreate(LoginRequiredMixin, CreateView):
     
 class NoteUpdate(LoginRequiredMixin, UpdateView):
   model = Note
-  fields = ['name','content']
+  fields = ['name','notetype','content','date', 'color','homescreen']
 
 class NoteDelete(LoginRequiredMixin, DeleteView):
   model = Note
   success_url = '/notes/'
 
 class Home(LoginView):
+  model = Note
   template_name = 'home.html'
+

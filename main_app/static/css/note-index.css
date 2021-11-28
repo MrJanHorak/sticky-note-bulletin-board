@@ -1,42 +1,39 @@
-/* .stickynote-container {
+.stickynote-container {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   gap: 10px;
-} */
+}
 
 .stickynote {
-  /* position: absolute; */
+  z-index:1;
   line-height: 1;
   text-align: center;
   width: 275px;
   margin-left: 5px;
   min-height: 250px;
   max-height: auto;
-  border: 1px solid #fde34e;
   font-size: 1.3em;
-  border-bottom-right-radius: 50px 5px;
+  border-bottom-right-radius: 50px 7px;
   display: inline-block;
-  background: linear-gradient(
-    135deg,
-    #e7cd65 81%,
-    #e7cd55 82%,
-    #e7cd45 82%,
-    #e7cdc5 100%
-  ); /* W3C */
+  /* filter: drop-shadow(30px 10px 4px #4444dd); */
 }
 
-.stickynote:after {
+/* .stickynote::after {
   content: "";
-  /* position: absolute; */
+  position: absolute;
   z-index: -1;
-  right: -0px;
-  bottom: 20px;
-  width: 200px;
+  right: 0px;
+  bottom: 2px;
+  width: 15%;
   height: 25px;
-  background: rgba(0, 0, 0, 0.2);
-  box-shadow: 2px 15px 5px rgba(0, 0, 0, 0.4);
-  transform: matrix(-1, -0.1, 0, 1, 0, 0);
+  background: rgba(0, 0, 0, 0.0);
+  box-shadow: 3px 6px 5px rgba(0, 0, 0, 0.4);
+  transform: matrix(-1, -0.1, 0, 1, 0, 0); 
+} */
+
+.usr-img{
+  width: 90%;
 }
 
 .page-header {

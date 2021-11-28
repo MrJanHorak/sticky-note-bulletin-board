@@ -15,8 +15,8 @@
 <section class="stickynote-container">
   {% for note in notes %}
       <a href="{% url 'notes_detail' note.id %}">
-    <div class="stickynote ui-widget-content draggable" id="draggable">
-        <div class="stickynote-content">
+    <div class="stickynote ui-widget-content draggable" id="draggable" style="background-color: {{ note.color }}">
+        <div class="stickynote-content" >
           <div class="stickynote-img-container">
           {% if note.photo.url %}
               <img 

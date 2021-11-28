@@ -1,21 +1,44 @@
-{% extends 'base.html' %}
-{% load static %}
-
-{% block head %}
-<link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}"/>
-{% endblock %}
-
-{% block content %}
+{% extends 'base.html' %} {% load static %} {% block head %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}" />
+{% endblock %} {% block content %} 
 
 {% if not user.is_authenticated %}
 <section>
+<div id='login'>
   <form action="{% url 'home' %}" method="post" class="login">
     <h1>Login</h1>
-    {% csrf_token %}
+    {% csrf_token %} 
     {{ form.as_p }}
-    <input type="hidden" name="next" value="{{ next }}">
+    <input type="hidden" name="next" value="{{ next }}" />
     <button type="submit" class="btn submit">Login</button>
   </form>
+</div>  
 </section>
-{% endif %}
-{% endblock %}
+{% else %}
+<div id="board">
+  <section class="stickynote-container">
+    {% for note in notes %}
+      {{note.homescreen}}
+      {% if note.homescreen is 'Y' %}
+      <a href="{% url 'notes_detail' note.id %}">
+        <div class="stickynote ui-widget-content draggable" id="draggable">
+          <div class="stickynote-content">
+            <div class="stickynote-img-container">
+              {% if note.photo.url %}
+              <img
+                src="{{note.photo.url}}"
+                alt="A photo for {{note.name}}"
+                class="usr-img"
+              />
+              {% endif %}
+            </div>
+            <h3 class="stickynote-title">{{ note.name }}</h3>
+            <p><small>{{ note.content }}</small></p>
+          </div>
+        </div>
+      </a>
+      {% endif %}
+    {% endfor %}
+  </section>
+</div>
+{% endif %} {% endblock %}

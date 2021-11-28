@@ -7,17 +7,25 @@ from django.contrib.auth.models import User
 NOTETYPE = (
   ('T', 'To-Do'),
   ('R', 'Reminder'),
-  ('L', 'Vocab/Learning')
+  ('L', 'Vocab/Learning'),
+  ('P', 'Photocard'),
 )
 
 COLOR = (
-  ('PI', 'pink'),
-  ('BP', 'bright pink'),
-  ('BY', 'yellow'),
-  ('DY', 'dark yellow'),
-  ('BL', 'blue'),
-  ('GR', 'green'),
+  ('#EAEC40', 'Dandelion'),
+  ('#FF7EB9', 'pink'),
+  ('#F275AD', 'Cyclamen'),
+  ('#79CBC5', 'Pearl Aqua'),
+  ('#FFFF97', 'Canary'),
+  ('#7AFCFF', 'blue'),
+  ('#FBAE4A', 'Pastel Orange'),
+  ('#F3858E', 'Tulip'),
+  ('#8D9440', 'Bright Green'),
+)
 
+HOMESCREEN = (
+  ('Y', 'Yes'),
+  ('N', 'No'),
 )
 
 class Note(models.Model):
@@ -30,9 +38,14 @@ class Note(models.Model):
   content=models.TextField(max_length=400)
   date=models.DateField('Due date')
   color=models.CharField(
-    max_length=2,
+    max_length=7,
     choices = COLOR,
     default=COLOR[2][0]
+  )
+  homescreen = models.CharField(
+    max_length=1,
+    choices= HOMESCREEN,
+    default=HOMESCREEN[1][0]
   )
   user = models.ForeignKey(User, on_delete=models.CASCADE)
 

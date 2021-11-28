@@ -6,7 +6,7 @@ body {
 #note-form {
   display: flex;
   flex-wrap: wrap;
-  background-color: ebd785;
+  background-color: #ebd785;
   width: 400px;
   min-height: 400px;
   padding: 15px;
@@ -58,4 +58,47 @@ body {
   height: 2em;
   font-family: inherit;
   border: .5px solid #e7cd65;
+}
+
+select option {
+  margin: 40px;
+  background: rgba(0, 0, 0, 0.3);
+  color: #fff;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+}
+
+select option[value="#EAEC40"] {
+  background: #EAEC40;
+}
+
+select option[value="#FF7EB9"] {
+  background: #FF7EB9;
+}
+
+select option[value="#F275AD"] {
+  background: #F275AD;
+}
+
+select option[value="#79CBC5"] {
+  background: #79CBC5;
+}
+
+select option[value="#FFFF97"] {
+  background: #FFFF97;
+}
+
+select option[value="#7AFCFF"] {
+  background: #7AFCFF;
+}
+
+select option[value="#FBAE4A"] {
+  background: #FBAE4A;
+}
+
+select option[value="#F3858E"] {
+  background: #F3858E;
+}
+
+select option[value="#8D9440"] {
+  background: #8D9440;
 }
