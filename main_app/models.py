@@ -1,5 +1,7 @@
 from django.db import models
+from django.db.models.fields import CharField
 from django.urls import reverse
+from django.contrib.postgres.fields import ArrayField
 from datetime import date
 from django.contrib.auth.models import User
 
@@ -35,6 +37,7 @@ class Note(models.Model):
     choices= NOTETYPE,
     default=NOTETYPE[1][0]
   )
+  toDo = ArrayField(models.CharField(max_length=100, blank=True),blank=True, null=True,)
   content=models.TextField(max_length=400)
   date=models.DateField('Due date')
   color=models.CharField(

@@ -8,16 +8,15 @@
 <link rel="stylesheet" type="text/css" href="{% static 'css/form.css' %}" />
 <script defer src="{% static 'js/note-create.js' %}"></script>
 <div id="note-form">
-{% endblock %} {% block content %} {% if object %}
-<h1>Edit {{object.name}}</h1>
-{% else %}
-<h1>Add a Note</h1>
-{% endif %}
-  {% comment %} Leaving the action empty makes the form post to the same url
-  used to display it {% endcomment %}
+  {% endblock %} {% block content %} {% if object %}
+  <h1>Edit {{object.name}}</h1>
+  {% else %}
+  <h1>Add a Note</h1>
+  {% endif %} {% comment %} Leaving the action empty makes the form post to the
+  same url used to display it {% endcomment %}
   <form action="" method="post" class="form-container">
-    {% comment %} Django requires the following for security purposes {% endcomment %} 
-    {% csrf_token %}
+    {% comment %} Django requires the following for security purposes {%
+    endcomment %} {% csrf_token %}
     <table>
       {% comment %} Render the inputs inside of
       <tr>
@@ -25,7 +24,12 @@
         <td>s {% endcomment %} {{ form.as_table }}</td>
       </tr>
     </table>
-    <button type="submit" class="btn submit">Submit!</button>
+    </br>
+    <div id="button-container">
+    <button type="submit" class="button-32">Submit!</button>
+    <input type="button" class="button-32" value="Go back!" onclick="history.back()" />
+    </div>
   </form>
 </div>
+
 {% endblock %}

@@ -3,6 +3,11 @@ body {
   justify-content: center;
   align-items: center;
 }
+
+input[type="file"]{
+  display: none;
+}
+
 .note-container {
   display: flex;
   flex-wrap: wrap;
@@ -15,53 +20,56 @@ body {
   box-shadow: 12 px, 13em;
 }
 
-#id_name {
-  width: 110%;
-  /* background-color: #e7cd65; */
-  border-radius: 4px;
-  height: 2em;
-  font-family: inherit;
-  border: 0.5px solid #e7cd65;
+.note-actions{
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+  height: 30px;
+  position: absolute;
+  bottom: 0px;
 }
 
-#id_notetype {
-  width: 110%;
-  /* background-color: #e7cd65; */
-  border-radius: 4px;
-  height: 2em;
+.button-32 {
+  margin: 5px;
+  background-color: #e4db68;
+  border-radius: 12px;
+  color: #000;
+  cursor: pointer;
+  font-weight: bold;
+  padding: 4px 4px;
+  text-align: center;
+  transition: 200ms;
+  width: 100px;
+  height: 35px;
+  box-sizing: border-box;
+  border: 0;
+  font-size: 12px;
   font-family: inherit;
-  border: 0.5px solid #e7cd65;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
 }
 
-#id_content {
-  width: 110%;
-  /* background-color: #e7cd65; */
-  border-radius: 4px;
-  height: 200px;
-  font-family: inherit;
-  border: 0.5px solid #e7cd65;
+.button-32:not(:disabled):hover,
+.button-32:not(:disabled):focus {
+  outline: 0;
+  background: #f4e603;
+  box-shadow: 0 0 0 2px rgba(0,0,0,.2), 0 3px 8px 0 rgba(0,0,0,.15);
 }
 
-#id_date {
-  width: 90px;
-  background-color: #e7cd65;
-  border-radius: 4px;
-  height: 2em;
-  font-family: inherit;
-  border: 0.5px solid #e7cd65;
-}
-
-#id_color {
-  width: 90px;
-  /* background-color: #e7cd65; */
-  border-radius: 4px;
-  height: 2em;
-  font-family: inherit;
-  border: 0.5px solid #e7cd65;
+.button-32:disabled {
+  filter: saturate(0.2) opacity(0.5);
+  cursor: not-allowed;
 }
 
 .usr-img {
+  margin-top: 5px;
   width: 100%;
+}
+
+.note-details{
+  position: relative;
+  width: 95%;
 }
 
 .note-details h3 {
@@ -69,9 +77,9 @@ body {
 }
 
 #file-input {
-  overflow: hidden;
+  /* overflow: hidden; */
   position: absolute;
-  width: 50px;
+  width: 100%;
   height: 30px;
 }
 
