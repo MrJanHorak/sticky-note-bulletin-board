@@ -1,15 +1,14 @@
 {% extends 'base.html' %}
 {% load static %}
-
 {% block head %}
-<link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}" />
+
 {% endblock %}
 
 {% block content %}
+<div id="login">
 
-<section class="logo-container">
-  
-</section>
+<h2>Sticky Note Bulletin Board</h2>
 
 {% if not user.is_authenticated %}
   <section>
@@ -22,5 +21,5 @@
     </form>
   </section>
 {% endif %}
-
+</div>
 {% endblock %}

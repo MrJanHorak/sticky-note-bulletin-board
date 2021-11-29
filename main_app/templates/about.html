@@ -1,11 +1,12 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} 
+{% load static %} 
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/about.css' %}" />
+<div id="about">
+<h2>Sticky Note Bulletin Board</h2>
 
-{% block content %}
-
-<h1>Sticky Note Bulletin Board</h1>
-<hr />
 <p>
   An interactive Bulletin Board for Sticky Notes for Smart Screen, mobile devices and more!
 </p>
-
+</div>
 {% endblock %}
