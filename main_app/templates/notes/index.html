@@ -1,6 +1,4 @@
-{% extends 'base.html' %} 
-{% load static %} 
-{% block head %}
+{% extends 'base.html' %} {% load static %} {% block head %}
 <link
   rel="stylesheet"
   type="text/css"
@@ -8,88 +6,99 @@
 />
 
 <script
-src="https://code.jquery.com/jquery-2.2.4.min.js"
-integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
-crossorigin="anonymous"></script>
+  src="https://code.jquery.com/jquery-2.2.4.min.js"
+  integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+  crossorigin="anonymous"
+></script>
 <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
-{% comment %} <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> {% endcomment %}
-{% comment %} <script defer src="https://unpkg.com/draggabilly@2/dist/draggabilly.pkgd.min.js"></script> {% endcomment %}
+
 <script defer src="{% static 'js/draggability.js' %}"></script>
 {% endblock %} {% block content %}
 <section class="page-header"></section>
 
 <div class="grid" id="containment-wrapper">
-
-  <div id="draggable" class="wrapper1 ui-widget-content stickynote draggable">
-      <header><i class='bx bx-left-arrow-alt'></i>Weather App</header>
-      <section class="input-part">
-        <p class="info-txt"></p>
-        <div class="content">
-          <input type="text" spellcheck="false" placeholder="Enter city name" required>
-          <div class="separator"></div>
-          <button>Get Device Location</button>
-        </div>
-      </section>
-      <section class="weather-part">
-        <img src="" alt="Weather Icon">
-        <div class="temp">
-          <span class="numb">_</span>
-          <span class="deg">°</span>C
-        </div>
-        <div class="weather">_ _</div>
-        <div class="location">
-          <i class='bx bx-map'></i>
-          <span>_, _</span>
-        </div>
-        <div class="bottom-details">
-          <div class="column feels">
-            <i class='bx bxs-thermometer'></i>
-            <div class="details">
-              <div class="temp">
-                <span class="numb-2">_</span>
-                <span class="deg">°</span>C
-              </div>
-              <p>Feels like</p>
+  <div id="draggable" class="wrapper1 stickynote draggable">
+    <header><i class="bx bx-left-arrow-alt"></i>Weather App</header>
+    <section class="input-part">
+      <p class="info-txt"></p>
+      <div class="content">
+        <input
+          type="text"
+          spellcheck="false"
+          placeholder="Enter city name"
+          required
+        />
+        <div class="separator"></div>
+        <button>Get Device Location</button>
+      </div>
+    </section>
+    <section class="weather-part">
+      <img src="" alt="Weather Icon" />
+      <div class="temp">
+        <span class="numb">_</span>
+        <span class="deg">°</span>C
+      </div>
+      <div class="weather">_ _</div>
+      <div class="location">
+        <i class="bx bx-map"></i>
+        <span>_, _</span>
+      </div>
+      <div class="bottom-details">
+        <div class="column feels">
+          <i class="bx bxs-thermometer"></i>
+          <div class="details">
+            <div class="temp">
+              <span class="numb-2">_</span>
+              <span class="deg">°</span>C
             </div>
-          </div>
-          <div class="column humidity">
-            <i class='bx bxs-droplet-half'></i>
-            <div class="details">
-              <span>_</span>
-              <p>Humidity</p>
-            </div>
+            <p>Feels like</p>
           </div>
         </div>
-      </section>
-    </div>
-
-    <div id="draggable" class="calendar stickynote draggable ui-widget-content" >
-      <div data-tockify-component="calendar" data-tockify-calendar="jan.horak"></div>
-<script data-cfasync="false" data-tockify-script="embed" src="https://public.tockify.com/browser/embed.js"></script>
-</div>
-
-    {% for note in notes %}
-    <a href="{% url 'notes_detail' note.id %}">
-      <div class="stickynote draggable ui-widget-content" id="draggable"
-        style="background-color: {{ note.color }} "
-        >
-        <div class="stickynote-content">
-          <div class="stickynote-img-container">
-            {% if note.photo.url %}
-            <img
-              src="{{note.photo.url}}"
-              alt="A photo for {{note.name}}"
-              class="usr-img"
-            />
-            {% endif %}
+        <div class="column humidity">
+          <i class="bx bxs-droplet-half"></i>
+          <div class="details">
+            <span>_</span>
+            <p>Humidity</p>
           </div>
-          <h3 class="stickynote-title">{{ note.name }}</h3>
-          <p><small>{{ note.content }}</small></p>
         </div>
       </div>
-    </a>
-    {% endfor %}
-  </section>
+    </section>
+  </div>
 
+  <div id="draggable" class="calendar stickynote draggable">
+    <div
+      data-tockify-component="calendar"
+      data-tockify-calendar="jan.horak"
+    ></div>
+    <script
+      data-cfasync="false"
+      data-tockify-script="embed"
+      src="https://public.tockify.com/browser/embed.js"
+    ></script>
+  </div>
+
+  {% for note in notes %}
+  <a href="{% url 'notes_detail' note.id %}">
+    <div
+      class="stickynote draggable"
+      id="draggable"
+      style="background-color: {{ note.color }} "
+    >
+      <div class="stickynote-content">
+        <div class="stickynote-img-container">
+          {% if note.photo.url %}
+          <img
+            src="{{note.photo.url}}"
+            alt="A photo for {{note.name}}"
+            class="usr-img"
+          />
+          {% endif %}
+        </div>
+        <h3 class="stickynote-title">{{ note.name }}</h3>
+        <p><small>{{ note.content }}</small></p>
+      </div>
+    </div>
+  </a>
+  {% endfor %}
 </div>
 {% endblock %}
