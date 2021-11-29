@@ -24,6 +24,7 @@
       <nav>
         <ul id="navigation">
           {% if user.is_authenticated %}
+          <li class="home"><a href="{% url 'home' %}">Team View</a></li>
           <li class="index">
             <a href="{% url 'notes_index' %}">All {{user.username}}'s Notes</a>
           </li>
@@ -32,10 +33,9 @@
           </li>
           <li class="about"><a href="{% url 'about' %}">About</a></li>
           <li><a href="{% url 'logout' %}">Log out</a></li>
-          <li class="home"><a href="{% url 'home' %}">Home</a></li>
           {% else %}
           <li class="about"><a href="{% url 'about' %}">About</a></li>
-          <li class="home"><a href="{% url 'home' %}">Login</a></li>
+          <li class="home"><a href="{% url 'login' %}">Login</a></li>
           <li class="signup"><a href="{% url 'signup' %}">Sign Up</a></li>
           {% endif %}
         </ul>

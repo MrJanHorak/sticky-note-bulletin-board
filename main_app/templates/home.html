@@ -6,18 +6,8 @@
 <section class="page-header"></section>
 
 <div class="grid" id="containment-wrapper">
-  {% comment %} {% if user %} {% endcomment %} {% comment %}
-  <section>
-    <div id="login">
-      <form action="{% url 'home' %}" method="post" class="login">
-        <h1>Login</h1>
-        {% csrf_token %} {{ form.as_p }}
-        <input type="hidden" name="next" value="{{ next }}" />
-        <button type="submit" class="btn submit">Login</button>
-      </form>
-    </div>
-  </section>
-  {% endcomment %} {% for note in notes %} {% if note.homescreen == 'Y' %}
+ {% for note in notes %} 
+ {% if note.homescreen == 'Y' %}
   <a href="{% url 'notes_detail' note.id %}">
     <div
       class="stickynote ui-widget-content draggable"

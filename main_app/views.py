@@ -18,12 +18,9 @@ BUCKET = 'sicky-note-board-image-bucket'
 def about(request):
   return render(request, 'about.html')
 
-# def home(request):
-#   notes = Note.objects.filter(user=request.user)
-#   return render(request, '/home.html', { 'notes': notes })
 @login_required
 def home(request):
-  notes = Note.objects.filter(user=request.user)
+  notes = Note.objects.all()
   return render(request, 'home.html', { 'notes': notes })
 
 @login_required
@@ -35,6 +32,7 @@ def notes_index(request):
 def notes_detail(request, note_id):
   note = Note.objects.get(id=note_id)
   return render(request, 'notes/detail.html', { 'note': note })
+
 
 def signup(request):
   error_message = ''
