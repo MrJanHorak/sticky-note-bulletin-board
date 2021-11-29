@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}"/>
+{% endblock %}
+
+{% block content %}
+
+<section class="logo-container">
+  
+</section>
+
+{% if not user.is_authenticated %}
+  <section>
+    <form action="{% url 'login' %}" method="post" class="login">
+      <h1>Login</h1>
+      {% csrf_token %}
+      {{ form.as_p }}
+      <input type="hidden" name="next" value="{{ next }}">
+      <button type="submit" class="btn submit">Login</button>
+    </form>
+  </section>
+{% endif %}
+
+{% endblock %}

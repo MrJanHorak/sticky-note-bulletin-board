@@ -1,11 +1,12 @@
 {% extends 'base.html' %} {% load static %} {% block head %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}" />
+<script src="https://unpkg.com/draggabilly@2/dist/draggabilly.pkgd.min.js"></script>
+<script defer src="{% static 'js/draggability.js' %}"></script>
 {% endblock %} {% block content %}
 <section class="page-header"></section>
 
-  <div class="grid" id="containment-wrapper">
-  
-  {% if not user.is_authenticated %}
+<div class="grid" id="containment-wrapper">
+  {% comment %} {% if user %} {% endcomment %} {% comment %}
   <section>
     <div id="login">
       <form action="{% url 'home' %}" method="post" class="login">
@@ -16,31 +17,30 @@
       </form>
     </div>
   </section>
-  {% else %}
-    <section class="stickynote-container">
-      {% for note in notes %} {% if note.homescreen == 'Y' %}
-      <a href="{% url 'notes_detail' note.id %}">
-        <div
-          class="stickynote ui-widget-content draggable"
-          id="draggable"
-          style="background-color: {{ note.color }} "
-        >
-          <div class="stickynote-content">
-            <div class="stickynote-img-container">
-              {% if note.photo.url %}
-              <img
-                src="{{note.photo.url}}"
-                alt="A photo for {{note.name}}"
-                class="usr-img"
-              />
-              {% endif %}
-            </div>
-            <h3 class="stickynote-title">{{ note.name }}</h3>
-            <p><small>{{ note.content }}</small></p>
-          </div>
+  {% endcomment %} {% for note in notes %} {% if note.homescreen == 'Y' %}
+  <a href="{% url 'notes_detail' note.id %}">
+    <div
+      class="stickynote ui-widget-content draggable"
+      id="draggable"
+      style="background-color: {{ note.color }} "
+    >
+      <div class="stickynote-content">
+        <div class="stickynote-img-container">
+          {% if note.photo.url %}
+          <img
+            src="{{note.photo.url}}"
+            alt="A photo for {{note.name}}"
+            class="usr-img"
+          />
+          {% endif %}
         </div>
-      </a>
-      {% endif %} {% endfor %}
-    </section>
+        <h3 class="stickynote-title">{{ note.name }}</h3>
+        <p><small>{{ note.content }}</small></p>
+      </div>
+    </div>
+  </a>
+
+  {% endif %}
+  {% endfor %}
 </div>
-{% endif %} {% endblock %}
+ {% endblock %}

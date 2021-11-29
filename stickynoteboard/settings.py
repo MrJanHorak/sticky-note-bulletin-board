@@ -58,7 +58,7 @@ ROOT_URLCONF = 'stickynoteboard.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [str(BASE_DIR.joinpath('templates'))],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -123,8 +123,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-LOGIN_URL = 'home'
-LOGIN_REDIRECT_URL = 'notes_index'
+LOGIN_URL = 'login'
+# LOGIN_REDIRECT_URL = 'notes_index'
 LOGIN_REDIRECT_URL = 'home'
 
 # Default primary key field type
