@@ -12,22 +12,26 @@
   <h1>Edit {{object.name}}</h1>
   {% else %}
   <h1>Add a Note</h1>
-  {% endif %} {% comment %} Leaving the action empty makes the form post to the
-  same url used to display it {% endcomment %}
+  {% endif %}
+
   <form action="" method="post" class="form-container">
-    {% comment %} Django requires the following for security purposes {%
-    endcomment %} {% csrf_token %}
+    {% csrf_token %}
+
     <table>
       {% comment %} Render the inputs inside of
-      <tr>
-        s &
-        <td>s {% endcomment %} {{ form.as_table }}</td>
+      <tr>s &<td>s {% endcomment %} 
+      {{ form.as_table }}
       </tr>
     </table>
-    </br>
+
     <div id="button-container">
-    <button type="submit" class="button-32">Submit!</button>
-    <input type="button" class="button-32" value="Go back!" onclick="history.back()" />
+      <button type="submit" class="button-32">Submit!</button>
+      <input
+        type="button"
+        class="button-32"
+        value="Go back!"
+        onclick="history.back()"
+      />
     </div>
   </form>
 </div>
