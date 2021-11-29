@@ -1,5 +1,44 @@
+a:link {
+  text-decoration: none;
+}
+
+.grid {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
 .stickynote {
-  /* position: absolute; */
+  position: relative;
+  z-index: 1;
+  line-height: 1;
+  text-align: center;
+  width: 275px;
+  margin-left: 5px;
+  min-height: 250px;
+  max-height: auto;
+  font-size: 1.3em;
+  border-bottom-right-radius: 50px 7px;
+  display: inline-block;
+}
+
+.usr-img {
+  margin-top: 13px;
+  max-width: 90%;
+  max-height: 250px;
+}
+
+.page-header {
+  height: 45px;
+}
+
+#containment-wrapper {
+  padding: 5px;
+}
+
+#login {
+  position: relative;
   line-height: 1;
   text-align: center;
   width: 275px;
@@ -10,7 +49,4 @@
   font-size: 1.3em;
   border-bottom-right-radius: 50px 5px;
 }
-
-.usr-img{
-  width: 90%;
 }

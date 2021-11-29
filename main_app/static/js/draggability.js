@@ -1,4 +1,3 @@
-
 // if you have multiple .draggable elements
 // get all draggie elements
 const draggableElems = document.querySelectorAll(".draggable");

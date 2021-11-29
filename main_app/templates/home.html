@@ -1,27 +1,30 @@
 {% extends 'base.html' %} {% load static %} {% block head %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}" />
-{% endblock %} {% block content %} 
+{% endblock %} {% block content %}
+<section class="page-header"></section>
 
-{% if not user.is_authenticated %}
-<section>
-<div id='login'>
-  <form action="{% url 'home' %}" method="post" class="login">
-    <h1>Login</h1>
-    {% csrf_token %} 
-    {{ form.as_p }}
-    <input type="hidden" name="next" value="{{ next }}" />
-    <button type="submit" class="btn submit">Login</button>
-  </form>
-</div>  
-</section>
-{% else %}
-<div id="board">
-  <section class="stickynote-container">
-    {% for note in notes %}
-      {{note.homescreen}}
-      {% if note.homescreen is 'Y' %}
+  <div class="grid" id="containment-wrapper">
+  
+  {% if not user.is_authenticated %}
+  <section>
+    <div id="login">
+      <form action="{% url 'home' %}" method="post" class="login">
+        <h1>Login</h1>
+        {% csrf_token %} {{ form.as_p }}
+        <input type="hidden" name="next" value="{{ next }}" />
+        <button type="submit" class="btn submit">Login</button>
+      </form>
+    </div>
+  </section>
+  {% else %}
+    <section class="stickynote-container">
+      {% for note in notes %} {% if note.homescreen == 'Y' %}
       <a href="{% url 'notes_detail' note.id %}">
-        <div class="stickynote ui-widget-content draggable" id="draggable">
+        <div
+          class="stickynote ui-widget-content draggable"
+          id="draggable"
+          style="background-color: {{ note.color }} "
+        >
           <div class="stickynote-content">
             <div class="stickynote-img-container">
               {% if note.photo.url %}
@@ -37,8 +40,7 @@
           </div>
         </div>
       </a>
-      {% endif %}
-    {% endfor %}
-  </section>
+      {% endif %} {% endfor %}
+    </section>
 </div>
 {% endif %} {% endblock %}

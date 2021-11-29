@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+
 .grid {
   display: flex;
   flex-direction: row;
@@ -6,7 +8,7 @@
 }
 
 .stickynote {
-  position: relative;
+  /* position: relative; */
   z-index: 1;
   line-height: 1;
   text-align: center;
@@ -17,21 +19,7 @@
   font-size: 1.3em;
   border-bottom-right-radius: 50px 7px;
   display: inline-block;
-  /* filter: drop-shadow(30px 10px 4px #4444dd); */
 }
-
-/* .stickynote::after {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  right: 0px;
-  bottom: 2px;
-  width: 15%;
-  height: 25px;
-  background: rgba(0, 0, 0, 0.0);
-  box-shadow: 3px 6px 5px rgba(0, 0, 0, 0.4);
-  transform: matrix(-1, -0.1, 0, 1, 0, 0); 
-} */
 
 .usr-img {
   margin-top: 13px;
@@ -55,12 +43,6 @@ a:link {
   height: 225px;
 } */
 
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
-
-::selection {
-  color: #fff;
-  background: #43affc;
-}
 .wrapper1 {
   width: 200px;
   background: #fff;

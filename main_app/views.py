@@ -22,6 +22,10 @@ def about(request):
 #   notes = Note.objects.filter(user=request.user)
 #   return render(request, '/home.html', { 'notes': notes })
 
+def home(request):
+  notes = Note.objects.filter(user=request.user)
+  return render(request, 'home.html', { 'notes': notes })
+
 @login_required
 def notes_index(request):
   notes = Note.objects.filter(user=request.user)
@@ -86,7 +90,7 @@ class NoteDelete(LoginRequiredMixin, DeleteView):
   model = Note
   success_url = '/notes/'
 
-class Home(LoginView):
-  model = Note
-  template_name = 'home.html'
+# class Home(LoginView):
+#   model = Note
+#   template_name = 'home.html'
 
