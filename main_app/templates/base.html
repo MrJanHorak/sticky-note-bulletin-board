@@ -28,7 +28,7 @@
           {% if user.is_authenticated %}
           <li class="home"><a href="{% url 'home' %}">Team View</a></li>
           <li class="index">
-            <a href="{% url 'notes_index' %}">All {{user.username}}'s Notes</a>
+            <a href="{% url 'notes_index' %}">{{user.username}}'s Notes</a>
           </li>
           <li class="create-note">
             <a href="{% url 'notes_create' %}">Add a Note</a>
