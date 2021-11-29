@@ -1,18 +1,26 @@
-{% extends 'base.html' %} {% load static %} {% block head %}
+{% extends 'base.html' %} 
+{% load static %} 
+{% block head %}
 <link
   rel="stylesheet"
   type="text/css"
   href="{% static 'css/note-index.css' %}"
 />
 
-<script src="https://unpkg.com/draggabilly@2/dist/draggabilly.pkgd.min.js"></script>
+<script
+src="https://code.jquery.com/jquery-2.2.4.min.js"
+integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+{% comment %} <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> {% endcomment %}
+{% comment %} <script defer src="https://unpkg.com/draggabilly@2/dist/draggabilly.pkgd.min.js"></script> {% endcomment %}
 <script defer src="{% static 'js/draggability.js' %}"></script>
 {% endblock %} {% block content %}
 <section class="page-header"></section>
 
 <div class="grid" id="containment-wrapper">
 
-  <div id="draggable" class="wrapper1 stickynote draggable" >
+  <div id="draggable" class="wrapper1 ui-widget-content stickynote draggable">
       <header><i class='bx bx-left-arrow-alt'></i>Weather App</header>
       <section class="input-part">
         <p class="info-txt"></p>
@@ -55,16 +63,16 @@
       </section>
     </div>
 
-    <div class="calendar stickynote draggable">
+    <div id="draggable" class="calendar stickynote draggable ui-widget-content" >
       <div data-tockify-component="calendar" data-tockify-calendar="jan.horak"></div>
 <script data-cfasync="false" data-tockify-script="embed" src="https://public.tockify.com/browser/embed.js"></script>
 </div>
 
     {% for note in notes %}
     <a href="{% url 'notes_detail' note.id %}">
-      <div class="stickynote draggable" id="draggable"
+      <div class="stickynote draggable ui-widget-content" id="draggable"
         style="background-color: {{ note.color }} "
-      >
+        >
         <div class="stickynote-content">
           <div class="stickynote-img-container">
             {% if note.photo.url %}
