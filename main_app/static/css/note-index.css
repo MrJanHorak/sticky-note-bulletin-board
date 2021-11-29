@@ -34,9 +34,9 @@ a:link {
   text-decoration: none;
 }
 
-/* .draggable.is-dragging {
+.draggable.is-dragging {
   opacity: 0.7;
-} */
+}
 
 /* .weather-info {
   width:316px;
