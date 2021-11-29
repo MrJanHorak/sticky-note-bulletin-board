@@ -67,3 +67,4 @@ class Photo(models.Model):
 
   def __str__(self):
     return f"Photo for note_id: {self.note_id} @{self.url}"
+
