@@ -12,9 +12,6 @@
   </div>
   <h4>Profile Personal Preferences</h4>
 
-  <form action="{% url 'profile' %}" method="post" class="form-container">
-
-  {% csrf_token %}
     {% for preference in profile %}
     <p>Calendar viewable on index: {{ preference.calendar_view }}</p>
     <p>Weather viewable on index: {{ preference.weather_view }}</p>
@@ -29,15 +26,15 @@
     {% else %}
     <p> No link for personal</br>backround image provided </p>
     {% endif %}
-    {% endfor %}
-  <div id="button-container">
-    <button type="submit" class="button-32">Submit!</button>
     <input
-      type="button"
-      class="button-32"
-      value="Go back!"
-      onclick="history.back()"
+    type="button"
+    class="button-32"
+    value="Go back!"
+    onclick="history.back()"
     />
-  </form>
+    <form action="{% url 'profile_update' preference.id %}">
+      <input type="submit" class="button-32" value="Edit" />
+    </form>
+      {% endfor %}
 </div>
 {% endblock %}

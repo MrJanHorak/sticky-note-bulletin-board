@@ -27,7 +27,7 @@
     >
       {% csrf_token %}
       <label class="button-32">
-        Choose photo <input type="file" " name="photo-file" id="file-input" />
+        Choose photo <input type="file" name="photo-file" id="file-input" />
       </label>
       <button type="submit" class="button-32">Upload Photo</button>
     </form>
@@ -40,7 +40,6 @@
         onclick="history.back()"
       />
       <form action="{% url 'notes_update' note.id %}">
-        <input type="submit" class="button-32" value="Edit" />
       </form>
       <form action="{% url 'notes_delete' note.id %}">
         <input type="submit" class="button-32" value="Delete" />

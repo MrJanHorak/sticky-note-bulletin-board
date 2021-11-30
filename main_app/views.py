@@ -18,15 +18,13 @@ BUCKET = 'sicky-note-board-image-bucket'
 def about(request):
   return render(request, 'about.html')
 
-class ProfileUpdate(LoginRequiredMixin, UpdateView):
-  model = Profile
-  fields = ['calendar_view', 'weather_view','background']
 
 @login_required
 def profile(request):
   profile = Profile.objects.filter(user=request.user)
   profile_form = ProfileForm(request.POST)
-  return render(request, 'profile.html',{'profile':profile, 'profile_form': profile_form})
+  profile_id = Profile.objects.get(user=request.user).id
+  return render(request, 'profile.html',{'profile':profile, 'profile_form': profile_form, 'profile_id': profile_id})
 
 @login_required
 def home(request):
@@ -111,10 +109,6 @@ class NoteUpdate(LoginRequiredMixin, UpdateView):
   model = Note
   fields = ['name','notetype','content','date', 'color','homescreen']
 
-class ProfileUpdate(LoginRequiredMixin, UpdateView):
-  model = Profile
-  fields = [all]
-
 class NoteDelete(LoginRequiredMixin, DeleteView):
   model = Note
   success_url = '/notes/'
@@ -122,3 +116,6 @@ class NoteDelete(LoginRequiredMixin, DeleteView):
 class Login(LoginView):
   template_name = 'login.html'
 
+class ProfileUpdate(LoginRequiredMixin, UpdateView):
+  model = Profile
+  fields = ['calendar_view', 'weather_view','background']

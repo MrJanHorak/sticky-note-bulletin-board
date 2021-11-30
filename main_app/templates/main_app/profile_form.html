@@ -1,0 +1,26 @@
+{% extends 'base.html' %} {% load static %} {% block head %}
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{% static 'css/profile_form.css' %}"
+/>
+{% endblock %} {% block content %}
+
+<div id="update-profile">
+  <div id="logo-container">
+    <img
+      id="logo"
+      src="{% static 'images/stickyBoardLogo.png' %}"
+      alt="A blank sticky note"
+    />
+  </div>
+  <h3>Update Profile Preferences</h3>
+  <form action="" method="post" class="form-container" autocomplete="off">
+    {% csrf_token %}
+    <table>
+      {{ form.as_table }}
+    </table>
+    <button type="submit" class="btn submit">Submit!</button>
+  </form>
+</div>
+{% endblock %}
