@@ -15,9 +15,21 @@
   <form action="{% url 'profile' %}" method="post" class="form-container">
 
   {% csrf_token %}
-
-    {{ profile_form.as_p }}
-
+    {% for preference in profile %}
+    <p>Calendar viewable on index: {{ preference.calendar_view }}</p>
+    <p>Weather viewable on index: {{ preference.weather_view }}</p>
+    <h5>Personal board background</h5>
+    {% if preference.background %}
+    <div id='background-tile'>
+      <img src="{{preference.background}}"
+      alt="User personal background"
+      id="personal-bg-img"
+      />
+    </div>
+    {% else %}
+    <p> No link for personal</br>backround image provided </p>
+    {% endif %}
+    {% endfor %}
   <div id="button-container">
     <button type="submit" class="button-32">Submit!</button>
     <input

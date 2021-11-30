@@ -3,7 +3,6 @@ from django.shortcuts import render, redirect
 from .models import Note, Photo, Profile
 from django.views.generic import ListView, DetailView
 from django.contrib.auth import authenticate, login
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -25,8 +24,9 @@ class ProfileUpdate(LoginRequiredMixin, UpdateView):
 
 @login_required
 def profile(request):
+  profile = Profile.objects.filter(user=request.user)
   profile_form = ProfileForm(request.POST)
-  return render(request, 'profile.html',{'profile_form': profile_form})
+  return render(request, 'profile.html',{'profile':profile, 'profile_form': profile_form})
 
 @login_required
 def home(request):
@@ -110,6 +110,10 @@ class NoteCreate(LoginRequiredMixin, CreateView):
 class NoteUpdate(LoginRequiredMixin, UpdateView):
   model = Note
   fields = ['name','notetype','content','date', 'color','homescreen']
+
+class ProfileUpdate(LoginRequiredMixin, UpdateView):
+  model = Profile
+  fields = [all]
 
 class NoteDelete(LoginRequiredMixin, DeleteView):
   model = Note
