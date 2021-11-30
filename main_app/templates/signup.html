@@ -8,16 +8,19 @@
 {% block content %}
 
 <div id="sign-up">
+<div id="logo-container">
+  <img id="logo" src="{% static 'images/stickyBoardLogo.png' %}" alt="A blank sticky note"/>
+</div>
   <h2>Sign Up</h2>
 {% if error_message %}
   <p class="red-text">{{ error_message }}</p>
 {% endif %}
 <form action="{% url 'signup' %} " method="post" class="form-container" autocomplete="off">
   {% csrf_token %}
-  <table>
+<table>
     {{ form.as_table }}
     {{ profile_form.as_table }}
-  </table>
+</table>
   <button type="submit" class="btn submit">Submit!</button>
 </form>
 </div>
