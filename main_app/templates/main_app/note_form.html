@@ -1,4 +1,6 @@
-{% extends 'base.html' %} {% load static %} {% block head %}
+{% extends 'base.html' %} 
+{% load static %}
+{% block head %}
 <link
   href="https://cdn.jsdelivr.net/npm/mc-datepicker/dist/mc-calendar.min.css"
   rel="stylesheet"
@@ -7,33 +9,38 @@
 <script src="https://cdn.jsdelivr.net/npm/mc-datepicker/dist/mc-calendar.min.js"></script>
 <link rel="stylesheet" type="text/css" href="{% static 'css/form.css' %}" />
 <script defer src="{% static 'js/note-create.js' %}"></script>
-<div id="note-form">
-  {% endblock %} {% block content %} {% if object %}
-  <h1>Edit {{object.name}}</h1>
-  {% else %}
-  <h1>Add a Note</h1>
-  {% endif %}
-
-  <form action="" method="post" class="form-container">
-    {% csrf_token %}
-
-    <table>
-      {% comment %} Render the inputs inside of
-      <tr>s &<td>s {% endcomment %} 
-      {{ form.as_table }}
-      </tr>
-    </table>
-
-    <div id="button-container">
-      <button type="submit" class="button-32">Submit!</button>
-      <input
-        type="button"
-        class="button-32"
-        value="Go back!"
-        onclick="history.back()"
-      />
-    </div>
-  </form>
-</div>
-
 {% endblock %}
+{% block content %}
+<div id="note-form">
+  <div id="form-container">
+    {% if object %}
+    <h1>Edit {{object.name}}</h1>
+    {% else %}
+    <h1>Add a Note</h1>
+    {% endif %}
+
+    <form action="" method="post" class="form-container">
+      {% csrf_token %}
+
+      <table>
+        {% comment %} Render the inputs inside of
+        <tr>
+          s &
+          <td>s {% endcomment %} {{ form.as_table }}</td>
+        </tr>
+      </table>
+
+      <div id="button-container">
+        <button type="submit" class="button-32">Submit!</button>
+        <input
+          type="button"
+          class="button-32"
+          value="Go back!"
+          onclick="history.back()"
+        />
+      </div>
+    </form>
+  </div>
+
+</div>
+  {% endblock %}

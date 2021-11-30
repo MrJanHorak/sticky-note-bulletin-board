@@ -94,16 +94,22 @@ select option[value="#8D9440"] {
 }
 
 #note-form {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  margin: auto;
   display: flex;
+  justify-content: center;
+  align-self: center;
   flex-wrap: wrap;
   background-color: #ebd785;
   width: 400px;
-  min-height: 400px;
+  min-height: 300px;
   padding: 15px;
-  padding-left: 35px;
   border-bottom-left-radius: 40px 5px;
   border-bottom-right-radius: 70px 15px;
-  box-shadow: 12 px, 13em;
+  box-shadow: 5px 5px 7px rgba(33,33,33,.7);
 }
 
 #id_name {
