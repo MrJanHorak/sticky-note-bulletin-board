@@ -8,12 +8,14 @@
 {% block content %}
 <div id="login">
 
-<h2>Sticky Note Bulletin Board</h2>
+  <div id="logo-container">
+    <img id="logo" src="{% static 'images/stickyBoardLogo.png' %}" alt="A blank sticky note"/>
+  </div>
 
 {% if not user.is_authenticated %}
   <section>
     <form action="{% url 'login' %}" method="post" class="login">
-      <h1>Login</h1>
+      <h3>Login</h3>
       {% csrf_token %}
       {{ form.as_p }}
       <input type="hidden" name="next" value="{{ next }}">
