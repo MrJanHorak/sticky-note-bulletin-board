@@ -14,9 +14,14 @@
 
 <script defer src="{% static 'js/draggability.js' %}"></script>
 {% endblock %} {% block content %}
+
 <section class="page-header"></section>
 
 <div class="grid" id="containment-wrapper">
+  {% if background %}
+    <body style="background-image: url({{ background }});" style="background-repeat: repeat;" style="background-size: contain;">
+  {% endif %}
+  {% if weather == 'Y' %}
   <div id="draggable_0{{user.id}}" class="wrapper1 stickynote draggable slide">
     <a
       class="weatherwidget-io"
@@ -42,7 +47,8 @@
       })(document, "script", "weatherwidget-io-js");
     </script>
   </div>
-
+  {% endif %}
+  {% if calendar == "Y" %}
   <div id="draggable_1{{user.id}}" class="calendar stickynote draggable slide">
     <div
       data-tockify-component="calendar"
@@ -54,7 +60,7 @@
       src="https://public.tockify.com/browser/embed.js"
     ></script>
   </div>
-
+  {% endif %}
   {% for note in notes %}
   <a href="{% url 'notes_detail' note.id %}">
     <div

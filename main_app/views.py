@@ -25,7 +25,8 @@ class ProfileUpdate(LoginRequiredMixin, UpdateView):
 
 @login_required
 def profile(request):
-  return render(request, 'profile.html')
+  profile_form = ProfileForm(request.POST)
+  return render(request, 'profile.html',{'profile_form': profile_form})
 
 @login_required
 def home(request):
@@ -34,8 +35,11 @@ def home(request):
 
 @login_required
 def notes_index(request):
+  calendar = Profile.objects.get(user=request.user).calendar_view
+  weather = Profile.objects.get(user=request.user).weather_view
+  background = Profile.objects.get(user=request.user).background
   notes = Note.objects.filter(user=request.user)
-  return render(request, 'notes/index.html', { 'notes': notes })
+  return render(request, 'notes/index.html', { 'notes': notes, 'calendar': calendar, 'weather': weather, 'background':background })
 
 @login_required
 def notes_detail(request, note_id):

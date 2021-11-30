@@ -7,22 +7,25 @@
 
 {% block content %}
 <div id="profile">
+  <div id="logo-container">
+    <img id="logo" src="{% static 'images/stickyBoardLogo.png' %}" alt="A blank sticky note"/>
+  </div>
+  <h4>Profile Personal Preferences</h4>
 
-<h2>Profile Personal Preferences</h2>
-<form action="" method="post" class="form-container">
+  <form action="{% url 'profile' %}" method="post" class="form-container">
 
-      {% csrf_token %}
-      {{ form.as_table }}
-      <div id="button-container">
-        <button type="submit" class="button-32">Submit!</button>
-        <input
-          type="button"
-          class="button-32"
-          value="Go back!"
-          onclick="history.back()"
-        />
-    </form>
-  </section>
+  {% csrf_token %}
 
+    {{ profile_form.as_p }}
+
+  <div id="button-container">
+    <button type="submit" class="button-32">Submit!</button>
+    <input
+      type="button"
+      class="button-32"
+      value="Go back!"
+      onclick="history.back()"
+    />
+  </form>
 </div>
 {% endblock %}
