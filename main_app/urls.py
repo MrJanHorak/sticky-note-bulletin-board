@@ -12,4 +12,5 @@ urlpatterns = [
   path('notes/<int:pk>/update/', views.NoteUpdate.as_view(), name='notes_update'),
   path('notes/<int:pk>/delete/', views.NoteDelete.as_view(), name='notes_delete'),
   path('notes/<int:note_id>/add_photo/', views.add_photo, name='add_photo'),
+  path('profile/', views.profile, name='profile'),
 ]

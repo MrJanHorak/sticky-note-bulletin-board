@@ -1,5 +1,8 @@
-
-var positions = JSON.parse(localStorage.positions || "{}");
+function myFunction(x) {
+  if (x.matches) { // If media query matches
+    $("[id^=draggable]").draggable( "destroy" );
+  } else {
+    var positions = JSON.parse(localStorage.positions || "{}");
 $(function () {
   var d = $("[id^=draggable]")
 
@@ -20,3 +23,9 @@ $(function () {
     },
   });
 });
+  }
+}
+
+var x = window.matchMedia("(max-width: 480px)")
+myFunction(x) // Call listener function at run time
+x.addListener(myFunction) // Attach listener function on state changes

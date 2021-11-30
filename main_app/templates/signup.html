@@ -12,10 +12,11 @@
 {% if error_message %}
   <p class="red-text">{{ error_message }}</p>
 {% endif %}
-<form action="" method="post" class="form-container" autocomplete="off">
+<form action="{% url 'signup' %} " method="post" class="form-container" autocomplete="off">
   {% csrf_token %}
   <table>
     {{ form.as_table }}
+    {{ profile_form.as_table }}
   </table>
   <button type="submit" class="btn submit">Submit!</button>
 </form>

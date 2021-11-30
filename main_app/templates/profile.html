@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/profile.css' %}" />
+
+{% endblock %}
+
+{% block content %}
+<div id="profile">
+
+<h2>Profile Personal Preferences</h2>
+<form action="" method="post" class="form-container">
+
+      {% csrf_token %}
+      {{ form.as_table }}
+      <div id="button-container">
+        <button type="submit" class="button-32">Submit!</button>
+        <input
+          type="button"
+          class="button-32"
+          value="Go back!"
+          onclick="history.back()"
+        />
+    </form>
+  </section>
+
+</div>
+{% endblock %}

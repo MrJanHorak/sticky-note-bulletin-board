@@ -30,6 +30,11 @@ HOMESCREEN = (
   ('N', 'No'),
 )
 
+YON = (
+  ('Y', 'Yes'),
+  ('N', 'No'),
+)
+
 class Note(models.Model):
   name = models.CharField(max_length=100)
   notetype = models.CharField(
@@ -38,7 +43,7 @@ class Note(models.Model):
     default=NOTETYPE[1][0]
   )
   toDo = ArrayField(models.CharField(max_length=100, blank=True),blank=True, null=True,)
-  content=models.TextField(max_length=400)
+  content=models.TextField(max_length=400, blank=True)
   date=models.DateField('Due date')
   color=models.CharField(
     max_length=7,
@@ -67,4 +72,21 @@ class Photo(models.Model):
 
   def __str__(self):
     return f"Photo for note_id: {self.note_id} @{self.url}"
+
+class Profile(models.Model):
+  user = models.OneToOneField(User, on_delete=models.CASCADE)
+  calendar_view = models.CharField(
+    max_length=1,
+    choices = YON,
+    default = YON[0][0]
+  )
+  weather_view = models.CharField(
+    max_length=1,
+    choices = YON,
+    default = YON[0][0]
+  )
+  background = models.CharField(max_length=250, blank=True )
+
+  def __str__(self):
+    return self.user.username
 
