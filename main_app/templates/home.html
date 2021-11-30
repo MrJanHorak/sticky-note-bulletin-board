@@ -17,7 +17,7 @@
   <a href="{% url 'notes_detail' note.id %}">
     <div
       class="stickynote ui-widget-content draggable"
-      id="draggable"
+      id="draggable_H{{user.id}}{{note.id }}"
       style="background-color: {{ note.color }} "
     >
       <div class="stickynote-content">
