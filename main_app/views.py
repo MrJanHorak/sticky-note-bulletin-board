@@ -24,12 +24,14 @@ def profile(request):
   profile = Profile.objects.filter(user=request.user)
   profile_form = ProfileForm(request.POST)
   profile_id = Profile.objects.get(user=request.user).id
+  background = Profile.objects.get(user=request.user).background
   return render(request, 'profile.html',{'profile':profile, 'profile_form': profile_form, 'profile_id': profile_id})
 
 @login_required
 def home(request):
   notes = Note.objects.all()
-  return render(request, 'home.html', { 'notes': notes })
+  background = Profile.objects.get(user=request.user).background
+  return render(request, 'home.html', { 'notes': notes, 'background':background })
 
 @login_required
 def notes_index(request):
@@ -41,6 +43,7 @@ def notes_index(request):
 
 @login_required
 def notes_detail(request, note_id):
+  background = Profile.objects.get(user=request.user).background
   note = Note.objects.get(id=note_id)
   return render(request, 'notes/detail.html', { 'note': note })
 
@@ -111,6 +114,7 @@ class NoteUpdate(LoginRequiredMixin, UpdateView):
 
 class NoteDelete(LoginRequiredMixin, DeleteView):
   model = Note
+  profile = Profile
   success_url = '/notes/'
 
 class Login(LoginView):
