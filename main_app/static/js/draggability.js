@@ -1,9 +1,8 @@
 
 var positions = JSON.parse(localStorage.positions || "{}");
 $(function () {
-  var d = $("[id=draggable]").attr("id", function (i) {
-    return "draggable_" + i;
-  });
+  var d = $("[id^=draggable]")
+
   $.each(positions, function (id, pos) {
     $("#" + id).css(pos);
   });
@@ -21,4 +20,3 @@ $(function () {
     },
   });
 });
-

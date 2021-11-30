@@ -17,14 +17,33 @@
 <section class="page-header"></section>
 
 <div class="grid" id="containment-wrapper">
-  <div id="draggable" class="wrapper1 stickynote draggable">
-    <a class="weatherwidget-io" href="https://forecast7.com/en/40d71n74d01/new-york/?unit=us" data-label_1="Harlem, GA, United States" data-label_2="WEATHER" data-font="Open Sans" data-icons="Climacons Animated" data-days="3" data-theme="pure" >Harlem, GA, United States WEATHER</a>
-<script>
-!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
-</script>
+  <div id="draggable_0" class="wrapper1 stickynote draggable">
+    <a
+      class="weatherwidget-io"
+      href="https://forecast7.com/en/40d71n74d01/new-york/?unit=us"
+      data-label_1="Harlem, GA, United States"
+      data-label_2="WEATHER"
+      data-font="Open Sans"
+      data-icons="Climacons Animated"
+      data-days="3"
+      data-theme="pure"
+      >Harlem, GA, United States WEATHER</a
+    >
+    <script>
+      !(function (d, s, id) {
+        var js,
+          fjs = d.getElementsByTagName(s)[0];
+        if (!d.getElementById(id)) {
+          js = d.createElement(s);
+          js.id = id;
+          js.src = "https://weatherwidget.io/js/widget.min.js";
+          fjs.parentNode.insertBefore(js, fjs);
+        }
+      })(document, "script", "weatherwidget-io-js");
+    </script>
   </div>
 
-  <div id="draggable" class="calendar stickynote draggable">
+  <div id="draggable_1" class="calendar stickynote draggable">
     <div
       data-tockify-component="calendar"
       data-tockify-calendar="jan.horak"
@@ -40,7 +59,7 @@
   <a href="{% url 'notes_detail' note.id %}">
     <div
       class="stickynote draggable"
-      id="draggable"
+      id="draggable_{{note.id }}"
       style="background-color: {{ note.color }} "
     >
       <div class="stickynote-content">
