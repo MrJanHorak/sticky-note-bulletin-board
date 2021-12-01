@@ -1,26 +1,30 @@
-{% extends 'base.html' %}
-{% load static %}
-{% block head %}
-<link rel="stylesheet" type="text/css" href="{% static 'css/sign-up.css' %}"/>
-{% endblock %}
-
-{% block content %}
+{% extends 'base.html' %} {% load static %} {% block head %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/sign-up.css' %}" />
+{% endblock %} {% block content %}
 
 <div id="sign-up">
-<div id="logo-container">
-  <img id="logo" src="{% static 'images/stickyBoardLogo.png' %}" alt="A blank sticky note"/>
-</div>
+  <div id="logo-container">
+    <img
+      id="logo"
+      src="{% static 'images/stickyBoardLogo.png' %}"
+      alt="A blank sticky note"
+    />
+  </div>
   <h2>Sign Up</h2>
-{% if error_message %}
+  {% if error_message %}
   <p class="red-text">{{ error_message }}</p>
-{% endif %}
-<form action="{% url 'signup' %} " method="post" class="form-container" autocomplete="off">
-  {% csrf_token %}
-<table>
-    {{ form.as_table }}
-    {{ profile_form.as_table }}
-</table>
-  <button type="submit" class="btn submit">Submit!</button>
-</form>
+  {% endif %}
+  <form
+    action="{% url 'signup' %} "
+    method="post"
+    class="form-container"
+    autocomplete="off"
+  >
+    {% csrf_token %}
+    <table>
+      {{ form.as_table }} {{ profile_form.as_table }}
+    </table>
+    <button type="submit" class="button-32 submit">Submit!</button>
+  </form>
 </div>
 {% endblock %}

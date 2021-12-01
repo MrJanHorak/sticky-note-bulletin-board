@@ -22,7 +22,10 @@ COLOR = (
   ('#7AFCFF', 'blue'),
   ('#FBAE4A', 'Pastel Orange'),
   ('#F3858E', 'Tulip'),
+  ('#B2EC5D', 'Inchworm')
   ('#8D9440', 'Bright Green'),
+  ('#FFFFFF', 'White'),
+  ('#BEBEBE', 'Grey'),
 )
 
 HOMESCREEN = (

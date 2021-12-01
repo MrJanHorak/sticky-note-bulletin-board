@@ -1,27 +1,25 @@
-{% extends 'base.html' %}
-{% load static %}
-{% block head %}
+{% extends 'base.html' %} {% load static %} {% block head %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}" />
 
-{% endblock %}
-
-{% block content %}
+{% endblock %} {% block content %}
 <div id="login">
-
   <div id="logo-container">
-    <img id="logo" src="{% static 'images/stickyBoardLogo.png' %}" alt="A blank sticky note"/>
+    <img
+      id="logo"
+      src="{% static 'images/stickyBoardLogo.png' %}"
+      alt="A blank sticky note"
+    />
   </div>
 
-{% if not user.is_authenticated %}
+  {% if not user.is_authenticated %}
   <section>
     <form action="{% url 'login' %}" method="post" class="login">
       <h3>Login</h3>
-      {% csrf_token %}
-      {{ form.as_p }}
-      <input type="hidden" name="next" value="{{ next }}">
-      <button type="submit" class="btn submit">Login</button>
+      {% csrf_token %} {{ form.as_p }}
+      <input type="hidden" name="next" value="{{ next }}" />
+      <button type="submit" class="button-32 submit">Login</button>
     </form>
   </section>
-{% endif %}
+  {% endif %}
 </div>
 {% endblock %}
