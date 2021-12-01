@@ -56,6 +56,14 @@ select option[value="#8D9440"] {
   background: #8D9440;
 }
 
+select option[value="#FFFFFF"] {
+  background: #FFFFFF;
+}
+
+select option[value="#BEBEBE"] {
+  background: #BEBEBE;
+}
+
 .button-32 {
   margin-top: 10px;
   background-color: #e7cd65;

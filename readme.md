@@ -35,7 +35,7 @@ https://sticky-note-bulletin-board.herokuapp.com/
 * Python
 * CSS
 * HTML
-* JavaScript/JSON
+* JavaScript/jQuery
 * Django
 * SQL
 
@@ -97,6 +97,8 @@ Google Fonts: https://fonts.google.com/specimen/Architects+Daughter
 <b>Background Textures used for personal user settings are from:</b> https://background-tiles.com
 
 <b>Random Sticky-Note rotation inspired by and adapted from:</b> https://tympanus.net/codrops/2010/02/24/grungy-random-rotation-menu-with-jquery-and-css3/
+
+<b>MCDatepicker:</b>https://mcdatepicker.netlify.app/
 
 And a shout out to the many others who left code-tidbits here and there is random forums, blogs and stackoverflow handling the many issues one runs into while developing an app. 
 

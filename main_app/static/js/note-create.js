@@ -5,6 +5,10 @@ const picker = MCDatepicker.create({
   dateFormat: 'yyyy-mm-dd',
   closeOnBlur: true,
   selectedDate: new Date(),
+  theme: {
+    theme_color: '#e0a470',
+    main_background: '#ebd785',
+}
 })
 
 dateInput.addEventListener("click", (evt) => {
