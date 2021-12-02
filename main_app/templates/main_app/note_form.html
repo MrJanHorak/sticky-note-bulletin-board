@@ -1,6 +1,4 @@
-{% extends 'base.html' %} 
-{% load static %}
-{% block head %}
+{% extends 'base.html' %} {% load static %} {% block head %}
 <link
   href="https://cdn.jsdelivr.net/npm/mc-datepicker/dist/mc-calendar.min.css"
   rel="stylesheet"
@@ -9,8 +7,7 @@
 <script src="https://cdn.jsdelivr.net/npm/mc-datepicker/dist/mc-calendar.min.js"></script>
 <link rel="stylesheet" type="text/css" href="{% static 'css/form.css' %}" />
 <script defer src="{% static 'js/note-create.js' %}"></script>
-{% endblock %}
-{% block content %}
+{% endblock %} {% block content %}
 <div id="note-form">
   <div id="form-container">
     {% if object %}
@@ -41,6 +38,5 @@
       </div>
     </form>
   </div>
-
 </div>
-  {% endblock %}
+{% endblock %}

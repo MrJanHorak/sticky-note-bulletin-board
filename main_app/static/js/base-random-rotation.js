@@ -2,14 +2,14 @@ $(function () {
   var d = 300;
   $(".stickynote").each(function () {
     var $this = $(this);
-    var r = Math.floor(Math.random()*5 ) ;
+    var r = Math.floor(Math.random() * 5);
     $this.css({
       "-moz-transform": "rotate(" + r + "deg)",
       "-webkit-transform": "rotate(" + r + "deg)",
       transform: "rotate(" + r + "deg)",
     });
   });
-  
+
   $("#navigation a").each(function () {
     var $this = $(this);
     var r = Math.floor(Math.random() * 41) - 20;
@@ -18,7 +18,7 @@ $(function () {
       "-webkit-transform": "rotate(" + r + "deg)",
       transform: "rotate(" + r + "deg)",
     });
-    
+
     $this.stop().animate(
       {
         marginTop: "-70px",

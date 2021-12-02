@@ -19,70 +19,77 @@
 
 <div class="grid" id="containment-wrapper">
   {% if background %}
-    <body style="background-image: url({{ background }});" style="background-repeat: repeat;" style="background-size: contain;">
-  {% endif %}
-  {% if weather == 'Y' %}
-  <div id="draggable_0{{user.id}}" class="wrapper1 stickynote draggable slide">
-    <a
-      class="weatherwidget-io"
-      href="https://forecast7.com/en/40d71n74d01/new-york/?unit=us"
-      data-label_1="Harlem, GA, United States"
-      data-label_2="WEATHER"
-      data-font="Open Sans"
-      data-icons="Climacons Animated"
-      data-days="3"
-      data-theme="pure"
-      >Harlem, GA, United States WEATHER</a
-    >
-    <script>
-      !(function (d, s, id) {
-        var js,
-          fjs = d.getElementsByTagName(s)[0];
-        if (!d.getElementById(id)) {
-          js = d.createElement(s);
-          js.id = id;
-          js.src = "https://weatherwidget.io/js/widget.min.js";
-          fjs.parentNode.insertBefore(js, fjs);
-        }
-      })(document, "script", "weatherwidget-io-js");
-    </script>
-  </div>
-  {% endif %}
-  {% if calendar == "Y" %}
-  <div id="draggable_1{{user.id}}" class="calendar stickynote draggable slide">
+  <body
+    style="background-image: url({{ background }});"
+    style="background-repeat: repeat"
+    style="background-size: contain"
+  >
+    {% endif %} {% if weather == 'Y' %}
     <div
-      data-tockify-component="calendar"
-      data-tockify-calendar="jan.horak"
-    ></div>
-    <script
-      data-cfasync="false"
-      data-tockify-script="embed"
-      src="https://public.tockify.com/browser/embed.js"
-    ></script>
-  </div>
-  {% endif %}
-  {% for note in notes %}
-  <a href="{% url 'notes_detail' note.id %}">
-    <div
-      class="stickynote draggable slide"
-      id="draggable_{{note.id }}"
-      style="background-color: {{ note.color }} "
+      id="draggable_0{{user.id}}"
+      class="wrapper1 stickynote draggable slide"
     >
-      <div class="stickynote-content">
-        <div class="stickynote-img-container">
-          {% if note.photo.url %}
-          <img
-            src="{{note.photo.url}}"
-            alt="A photo for {{note.name}}"
-            class="usr-img"
-          />
-          {% endif %}
-        </div>
-        <h3 class="stickynote-title">{{ note.name }}</h3>
-        <p><small>{{ note.content }}</small></p>
-      </div>
+      <a
+        class="weatherwidget-io"
+        href="https://forecast7.com/en/40d71n74d01/new-york/?unit=us"
+        data-label_1="Harlem, GA, United States"
+        data-label_2="WEATHER"
+        data-font="Open Sans"
+        data-icons="Climacons Animated"
+        data-days="3"
+        data-theme="pure"
+        >Harlem, GA, United States WEATHER</a
+      >
+      <script>
+        !(function (d, s, id) {
+          var js,
+            fjs = d.getElementsByTagName(s)[0];
+          if (!d.getElementById(id)) {
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "https://weatherwidget.io/js/widget.min.js";
+            fjs.parentNode.insertBefore(js, fjs);
+          }
+        })(document, "script", "weatherwidget-io-js");
+      </script>
     </div>
-  </a>
-  {% endfor %}
+    {% endif %} {% if calendar == "Y" %}
+    <div
+      id="draggable_1{{user.id}}"
+      class="calendar stickynote draggable slide"
+    >
+      <div
+        data-tockify-component="calendar"
+        data-tockify-calendar="jan.horak"
+      ></div>
+      <script
+        data-cfasync="false"
+        data-tockify-script="embed"
+        src="https://public.tockify.com/browser/embed.js"
+      ></script>
+    </div>
+    {% endif %} {% for note in notes %}
+    <a href="{% url 'notes_detail' note.id %}">
+      <div
+        class="stickynote draggable slide"
+        id="draggable_{{note.id }}"
+        style="background-color: {{ note.color }} "
+      >
+        <div class="stickynote-content">
+          <div class="stickynote-img-container">
+            {% if note.photo.url %}
+            <img
+              src="{{note.photo.url}}"
+              alt="A photo for {{note.name}}"
+              class="usr-img"
+            />
+            {% endif %}
+          </div>
+          <h3 class="stickynote-title">{{ note.name }}</h3>
+          <p><small>{{ note.content }}</small></p>
+        </div>
+      </div>
+    </a>
+    {% endfor %} {% endblock %}
+  </body>
 </div>
-{% endblock %}

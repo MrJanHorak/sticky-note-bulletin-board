@@ -1,6 +1,6 @@
 body {
   background-image: url("/static/images/corkboard-background-with-seamless-cork-texture.jpg");
-  font-family: 'Architects Daughter', cursive;
+  font-family: "Architects Daughter", cursive;
 }
 
 ul#navigation {
@@ -10,14 +10,13 @@ ul#navigation {
   top: 0px;
   right: 200px;
   list-style: none;
-  z-index:999999;
+  z-index: 999999;
 }
 ul#navigation li {
-  display:inline;
-  float:left;
-  width:100px;
-  margin-left:1px;
-
+  display: inline;
+  float: left;
+  width: 100px;
+  margin-left: 1px;
 }
 ul#navigation li a {
   display: block;
@@ -27,8 +26,9 @@ ul#navigation li a {
   width: 125px;
   height: 35px;
   color: #603d05;
-  background: transparent url("/static/images/pngaaa.com-794390.png") no-repeat bottom right;
-  text-decoration:none;
+  background: transparent url("/static/images/pngaaa.com-794390.png") no-repeat
+    bottom right;
+  text-decoration: none;
   text-align: center;
   padding-top: 80px;
   margin-top: -40px;

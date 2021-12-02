@@ -20,10 +20,10 @@ body {
   padding: 15px;
   border-bottom-left-radius: 40px 5px;
   border-bottom-right-radius: 70px 15px;
-  box-shadow: 5px 5px 7px rgba(33,33,33,.7);
+  box-shadow: 5px 5px 7px rgba(33, 33, 33, 0.7);
 }
 
-#logo-container{
+#logo-container {
   display: flex;
   justify-content: center;
   align-content: center;
@@ -32,7 +32,6 @@ body {
 #logo {
   width: 200px;
 }
-
 
 .button-32 {
   margin-top: 10px;
@@ -59,7 +58,7 @@ body {
 .button-32:not(:disabled):focus {
   outline: 0;
   background: #f4e603;
-  box-shadow: 0 0 0 2px rgba(0,0,0,.2), 0 3px 8px 0 rgba(0,0,0,.15);
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.2), 0 3px 8px 0 rgba(0, 0, 0, 0.15);
 }
 
 .button-32:disabled {
@@ -67,6 +66,6 @@ body {
   cursor: not-allowed;
 }
 
-#button-container{
+#button-container {
   text-align: center;
 }

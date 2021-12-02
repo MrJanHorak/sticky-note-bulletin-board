@@ -1,13 +1,16 @@
-{% extends 'base.html' %} 
-{% load static %} 
-{% block head %}
+{% extends 'base.html' %} {% load static %} {% block head %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/about.css' %}" />
 <div id="about">
   <div id="logo-container">
-    <img id="logo" src="{% static 'images/stickyBoardLogo.png' %}" alt="A blank sticky note"/>
+    <img
+      id="logo"
+      src="{% static 'images/stickyBoardLogo.png' %}"
+      alt="A blank sticky note"
+    />
   </div>
-<p>
-  An interactive Bulletin Board for 'Sticky Notes' on smart screens in classrooms, homes, office displays ane more!
-</p>
+  <p>
+    An interactive Bulletin Board for 'Sticky Notes' on smart screens in
+    classrooms, homes, office displays and more!
+  </p>
 </div>
 {% endblock %}
