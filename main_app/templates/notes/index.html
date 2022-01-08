@@ -58,15 +58,7 @@
       id="draggable_1{{user.id}}"
       class="calendar stickynote draggable slide"
     >
-      <div
-        data-tockify-component="calendar"
-        data-tockify-calendar="jan.horak"
-      ></div>
-      <script
-        data-cfasync="false"
-        data-tockify-script="embed"
-        src="https://public.tockify.com/browser/embed.js"
-      ></script>
+    <iframe src="https://calendar.google.com/calendar/embed?height=350&wkst=1&bgcolor=%23ffffff&ctz=America%2FNew_York&showTitle=0&showCalendars=0&showTz=0&showPrint=0&showDate=1&showNav=0&src=N3Zvc2poaTR1Z2d0aXUzaDVwdnFjaWhtNWtAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&color=%23D50000" style="border-width:0" width="250" height="250" frameborder="0" scrolling="no"></iframe>
     </div>
     {% endif %} {% for note in notes %}
     <a href="{% url 'notes_detail' note.id %}">
