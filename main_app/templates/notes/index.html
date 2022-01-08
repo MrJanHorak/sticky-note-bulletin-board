@@ -4,6 +4,11 @@
   type="text/css"
   href="{% static 'css/note-index.css' %}"
 />
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{% static 'css/calendar.css' %}"
+/>
 
 <script
   src="https://code.jquery.com/jquery-2.2.4.min.js"
@@ -11,8 +16,10 @@
   crossorigin="anonymous"
 ></script>
 <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.5.1/moment.min.js"></script>
 
 <script defer src="{% static 'js/draggability.js' %}"></script>
+<script defer src="{% static 'js/calendar.js' %}"></script>
 {% endblock %} {% block content %}
 
 <section class="page-header"></section>
@@ -56,9 +63,9 @@
     {% endif %} {% if calendar == "Y" %}
     <div
       id="draggable_1{{user.id}}"
-      class="calendar stickynote draggable slide"
+      class="calbod draggable slide"
     >
-    <iframe src="https://calendar.google.com/calendar/embed?height=350&wkst=1&bgcolor=%23ffffff&ctz=America%2FNew_York&showTitle=0&showCalendars=0&showTz=0&showPrint=0&showDate=1&showNav=0&src=N3Zvc2poaTR1Z2d0aXUzaDVwdnFjaWhtNWtAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&color=%23D50000" style="border-width:0" width="250" height="250" frameborder="0" scrolling="no"></iframe>
+    <div id="calendar"></div>
     </div>
     {% endif %} {% for note in notes %}
     <a href="{% url 'notes_detail' note.id %}">
