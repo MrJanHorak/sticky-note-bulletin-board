@@ -1,1 +1,1 @@
-web: gunicorn stickynoteboard.wsgi
+web: gunicorn --chdir stickynoteboard stickynoteboard.wsgi
