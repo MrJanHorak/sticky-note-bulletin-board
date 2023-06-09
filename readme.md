@@ -16,7 +16,7 @@ Users can create, update, and delete notes, even add pictures, and place the not
 
 ## <b>Visit the app:</b>
 
-https://sticky-note-bulletin-board.herokuapp.com/
+https://stickynotebullitenboard.fly.dev/
 
 ## <b>Screenshots</b>
 
