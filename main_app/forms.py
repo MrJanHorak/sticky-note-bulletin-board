@@ -7,6 +7,7 @@ class ExtendedUserCreationForm(UserCreationForm):
     email = forms.EmailField(required=True)
     first_name = forms.CharField(max_length=30)
     last_name = forms.CharField(max_length=150)
+    location = forms.CharField(max_length=100, required=False)
 
     class Meta:
         model = User
@@ -20,6 +21,7 @@ class ExtendedUserCreationForm(UserCreationForm):
 
         if commit:
             user.save()
+            profile = Profile.objects.create(user=user, location=self.cleaned_data['location'])
         return user
 
 class ProfileForm(forms.ModelForm):

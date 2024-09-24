@@ -12,9 +12,9 @@
     {% endif %}
   </div>
   <div class="note-details">
-   {% if note.user == request.user %}
     <h1>{{ note.name }}</h1>
     <p>{{ note.content }}</p>
+   {% if note.user == request.user %}
     <p id="file-name"></p>
     <form action="{% url 'add_photo' note.id %}" enctype="multipart/form-data" method="POST">
       {% csrf_token %}

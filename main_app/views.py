@@ -59,12 +59,12 @@ def notes_detail(request, note_id):
 def signup(request):
   if request.method == 'POST':
     form = ExtendedUserCreationForm(request.POST)
-    profile_form = ProfileForm(request.POST)
+    # profile_form = ProfileForm(request.POST)
     if form.is_valid() and profile_form.is_valid():
       user = form.save()
-      profile = profile_form.save(commit=False)
-      profile.user = user
-      profile.save()
+      # profile = profile_form.save(commit=False)
+      # profile.user = user
+      # profile.save()
       username = form.cleaned_data.get('username')
       password = form.cleaned_data.get('password1')
       user = authenticate(username=username, password=password)
@@ -127,4 +127,4 @@ class Login(LoginView):
 
 class ProfileUpdate(LoginRequiredMixin, UpdateView):
   model = Profile
-  fields = ['calendar_view', 'weather_view', 'background']
+  fields = ('calendar_view', 'weather_view', 'background', 'location')
