@@ -22,10 +22,21 @@ def about(request):
 
 
 @login_required
+@login_required
 def profile(request):
-  profile = Profile.objects.get(user=request.user)
-  profile_form = ProfileForm(request.POST or None)
-  return render(request, 'profile.html', {'profile': profile, 'profile_form': profile_form, 'profile_id': profile.id})
+    try:
+        profile = Profile.objects.get(user=request.user)
+    except Profile.DoesNotExist:
+        logger.error(f"Profile does not exist for user: {request.user}")
+        return render(request, 'profile.html', {'error': 'Profile does not exist.'})
+
+    profile_form = ProfileForm(request.POST or None, instance=profile)
+
+    if request.method == 'POST' and profile_form.is_valid():
+        profile_form.save()
+        return redirect('profile')  # Redirect to the profile page after saving
+
+    return render(request, 'profile.html', {'profile': profile, 'profile_form': profile_form})
 
 @login_required
 def home(request):

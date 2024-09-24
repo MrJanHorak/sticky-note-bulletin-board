@@ -12,6 +12,7 @@
     {% endif %}
   </div>
   <div class="note-details">
+   {% if note.user == request.user %}
     <h1>{{ note.name }}</h1>
     <p>{{ note.content }}</p>
     <p id="file-name"></p>
@@ -22,13 +23,14 @@
       </label>
       <button type="submit" class="button-32">Upload Photo</button>
     </form>
+    {% endif %}
     </br>
     <div class="note-actions">
       <input type="button" class="button-32" value="Go back!" onclick="window.location.href='{% url 'home' %}'" />
+      {% if note.user == request.user %}
       <form action="{% url 'notes_update' note.id %}">
         <button type="submit" class="button-32 submit">Edit</button>
       </form>
-      {% if note.user == request.user %}
       <form action="{% url 'notes_delete' note.id %}">
         <input type="submit" class="button-32" value="Delete" />
       </form>
