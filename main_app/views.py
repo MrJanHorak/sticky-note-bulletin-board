@@ -46,9 +46,13 @@ def home(request):
 
 @login_required
 def notes_index(request):
-  profile = Profile.objects.get(user=request.user)
-  notes = Note.objects.filter(user=request.user)
-  return render(request, 'notes/index.html', {'notes': notes, 'calendar': profile.calendar_view, 'weather': profile.weather_view, 'background': profile.background})
+  try:
+        notes = Note.objects.filter(user=request.user)
+        profile = Profile.objects.get(user=request.user)
+        location = profile.location
+  except Profile.DoesNotExist:
+        location = "New York"
+  return render(request, 'notes/index.html', {'notes': notes, 'calendar': profile.calendar_view, 'weather': profile.weather_view, 'background': profile.background, 'location': location})
 
 @login_required
 def notes_detail(request, note_id):

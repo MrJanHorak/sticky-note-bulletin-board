@@ -1,4 +1,4 @@
-{% extends 'base.html' %} {% load static %} {% block head %}
+{% extends 'base.html' %} {% load static %} {% load slugify %} {% block head %}
 <link
   rel="stylesheet"
   type="text/css"
@@ -38,14 +38,14 @@
     >
       <a
         class="weatherwidget-io"
-        href="https://forecast7.com/en/40d71n74d01/new-york/?unit=us"
-        data-label_1="Harlem, GA, United States"
+        href="https://forecast7.com/en/40d71n74d01/{{ location|slugify }}/?unit=us"
+        data-label_1="{{ location }}"
         data-label_2="WEATHER"
         data-font="Open Sans"
         data-icons="Climacons Animated"
         data-days="3"
         data-theme="pure"
-        >Harlem, GA, United States WEATHER</a
+        >{{ location }} WEATHER</a
       >
       <script>
         !(function (d, s, id) {
