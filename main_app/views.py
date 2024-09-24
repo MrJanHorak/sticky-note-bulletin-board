@@ -1,4 +1,3 @@
-from django.http import request
 from django.shortcuts import render, redirect
 from .models import Note, Photo, Profile
 from django.views.generic import ListView, DetailView
@@ -7,7 +6,10 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.views import LoginView
-from .forms import ExtenedUserCreationForm, ProfileForm
+from django.shortcuts import get_object_or_404
+from django.http import HttpResponseForbidden
+from django.urls import reverse_lazy
+from .forms import ExtendedUserCreationForm, ProfileForm
 import uuid
 import boto3
 
@@ -21,65 +23,46 @@ def about(request):
 
 @login_required
 def profile(request):
-  profile = Profile.objects.filter(user=request.user)
-  profile_form = ProfileForm(request.POST)
-  profile_id = Profile.objects.get(user=request.user).id
-  background = Profile.objects.get(user=request.user).background
-  return render(request, 'profile.html',{'profile':profile, 'profile_form': profile_form, 'profile_id': profile_id})
+  profile = Profile.objects.get(user=request.user)
+  profile_form = ProfileForm(request.POST or None)
+  return render(request, 'profile.html', {'profile': profile, 'profile_form': profile_form, 'profile_id': profile.id})
 
 @login_required
 def home(request):
   notes = Note.objects.all()
   background = Profile.objects.get(user=request.user).background
-  return render(request, 'home.html', { 'notes': notes, 'background':background })
+  return render(request, 'home.html', {'notes': notes, 'background': background})
 
 @login_required
 def notes_index(request):
-  calendar = Profile.objects.get(user=request.user).calendar_view
-  weather = Profile.objects.get(user=request.user).weather_view
-  background = Profile.objects.get(user=request.user).background
+  profile = Profile.objects.get(user=request.user)
   notes = Note.objects.filter(user=request.user)
-  return render(request, 'notes/index.html', { 'notes': notes, 'calendar': calendar, 'weather': weather, 'background':background })
+  return render(request, 'notes/index.html', {'notes': notes, 'calendar': profile.calendar_view, 'weather': profile.weather_view, 'background': profile.background})
 
 @login_required
 def notes_detail(request, note_id):
   background = Profile.objects.get(user=request.user).background
   note = Note.objects.get(id=note_id)
-  return render(request, 'notes/detail.html', { 'note': note })
-
+  return render(request, 'notes/detail.html', {'note': note, 'background': background})
 
 def signup(request):
-  # error_message = ''
   if request.method == 'POST':
-    # This is how to create a 'user' form object
-    # that includes the data from the browser
-    form = ExtenedUserCreationForm(request.POST)
+    form = ExtendedUserCreationForm(request.POST)
     profile_form = ProfileForm(request.POST)
-
     if form.is_valid() and profile_form.is_valid():
-      # This will add the user to the database
       user = form.save()
-
       profile = profile_form.save(commit=False)
       profile.user = user
-
       profile.save()
-
       username = form.cleaned_data.get('username')
       password = form.cleaned_data.get('password1')
       user = authenticate(username=username, password=password)
-      # This is how we log a user in
       login(request, user)
       return redirect('notes_index')
-    else:
-      # error_message = 'Invalid sign up - try again'
-      form = ExtenedUserCreationForm()
-      profile_form = ProfileForm()
-  # A bad POST or a GET request, so render signup.html with an empty form
-  form = ExtenedUserCreationForm()
-  profile_form = ProfileForm()
+  else:
+    form = ExtendedUserCreationForm()
+    profile_form = ProfileForm()
   context = {'form': form, 'profile_form': profile_form}
-  
   return render(request, 'signup.html', context)
 
 def add_photo(request, note_id):
@@ -101,25 +84,36 @@ def add_photo(request, note_id):
 
 class NoteCreate(LoginRequiredMixin, CreateView):
   model = Note
-  fields = ['name','notetype','content','date', 'color','homescreen']
+  fields = ['name', 'notetype', 'content', 'date', 'color', 'homescreen']
   success_url = '/notes/'
 
   def form_valid(self, form):
     form.instance.user = self.request.user
     return super().form_valid(form)
-    
+
 class NoteUpdate(LoginRequiredMixin, UpdateView):
-  model = Note
-  fields = ['name','notetype','content','date', 'color','homescreen']
+    model = Note
+    fields = ['name', 'notetype', 'content', 'date', 'color', 'homescreen']
+
+    def get_object(self, queryset=None):
+        note = super().get_object(queryset)
+        if note.user != self.request.user:
+            raise HttpResponseForbidden("You are not allowed to edit this note.")
+        return note
 
 class NoteDelete(LoginRequiredMixin, DeleteView):
-  model = Note
-  profile = Profile
-  success_url = '/notes/'
+    model = Note
+    success_url = reverse_lazy('notes_index')
 
+    def delete(self, request, *args, **kwargs):
+        note = get_object_or_404(Note, pk=kwargs['pk'])
+        if note.user != request.user:
+            return HttpResponseForbidden("You are not allowed to delete this note.")
+        return super().delete(request, *args, **kwargs)
+    
 class Login(LoginView):
   template_name = 'login.html'
 
 class ProfileUpdate(LoginRequiredMixin, UpdateView):
   model = Profile
-  fields = ['calendar_view', 'weather_view','background']
+  fields = ['calendar_view', 'weather_view', 'background']

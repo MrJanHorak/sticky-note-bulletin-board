@@ -1,8 +1,6 @@
 from django.db import models
-from django.db.models.fields import CharField
 from django.urls import reverse
 from django.contrib.postgres.fields import ArrayField
-from datetime import date
 from django.contrib.auth.models import User
 
 # Create your models here.
@@ -15,11 +13,11 @@ NOTETYPE = (
 
 COLOR = (
   ('#EAEC40', 'Dandelion'),
-  ('#FF7EB9', 'pink'),
+  ('#FF7EB9', 'Pink'),
   ('#F275AD', 'Cyclamen'),
   ('#79CBC5', 'Pearl Aqua'),
   ('#FFFF97', 'Canary'),
-  ('#7AFCFF', 'blue'),
+  ('#7AFCFF', 'Blue'),
   ('#FBAE4A', 'Pastel Orange'),
   ('#F3858E', 'Tulip'),
   ('#B2EC5D', 'Inchworm'),
@@ -42,20 +40,20 @@ class Note(models.Model):
   name = models.CharField(max_length=100)
   notetype = models.CharField(
     max_length=1,
-    choices= NOTETYPE,
+    choices=NOTETYPE,
     default=NOTETYPE[1][0]
   )
-  toDo = ArrayField(models.CharField(max_length=100, blank=True),blank=True, null=True,)
-  content=models.TextField(max_length=400, blank=True)
-  date=models.DateField('Due date')
-  color=models.CharField(
+  to_do = ArrayField(models.CharField(max_length=100, blank=True), blank=True, null=True)
+  content = models.TextField(max_length=400, blank=True)
+  date = models.DateField('Due date')
+  color = models.CharField(
     max_length=7,
-    choices = COLOR,
+    choices=COLOR,
     default=COLOR[2][0]
   )
   homescreen = models.CharField(
     max_length=1,
-    choices= HOMESCREEN,
+    choices=HOMESCREEN,
     default=HOMESCREEN[1][0]
   )
   user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -80,19 +78,18 @@ class Profile(models.Model):
   user = models.OneToOneField(User, on_delete=models.CASCADE)
   calendar_view = models.CharField(
     max_length=1,
-    choices = YON,
-    default = YON[0][0]
+    choices=YON,
+    default=YON[0][0]
   )
   weather_view = models.CharField(
     max_length=1,
-    choices = YON,
-    default = YON[0][0]
+    choices=YON,
+    default=YON[0][0]
   )
-  background = models.CharField(max_length=250, blank=True )
+  background = models.CharField(max_length=250, blank=True)
 
   def __str__(self):
     return self.user.username
 
   def get_absolute_url(self):
     return reverse('profile')
-

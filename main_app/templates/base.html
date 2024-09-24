@@ -19,14 +19,13 @@
     ></script>
     <script defer src="{% static 'js/base-random-rotation.js' %}"></script>
     <title>Sticky Note Bulletin Board</title>
-    {% block head %} {% endblock %}
-  {% if user.is_authenticated %}
-    {% if background %}
-  <body style="background-image: url({{ background }});" style="background-repeat: repeat;" style="background-size: contain;">
-  {% endif %}
-  {% endif %}
+    {% block head %}{% endblock %}
   </head>
-  <body>
+  <body
+    {% if user.is_authenticated and background %}
+    style="background-image: url({{ background }}); background-repeat: repeat; background-size: contain;"
+    {% endif %}
+  >
     <header>
       <div class="header-logo-container"></div>
       <nav>
@@ -34,7 +33,7 @@
           {% if user.is_authenticated %}
           <li class="home"><a href="{% url 'home' %}">Team View</a></li>
           <li class="index">
-            <a href="{% url 'notes_index' %}">{{user.username}}'s Notes</a>
+            <a href="{% url 'notes_index' %}">{{ user.username }}'s Notes</a>
           </li>
           <li class="create-note">
             <a href="{% url 'notes_create' %}">Add a Note</a>
@@ -50,6 +49,6 @@
         </ul>
       </nav>
     </header>
-    <main>{% block content %} {% endblock %}</main>
+    <main>{% block content %}{% endblock %}</main>
   </body>
 </html>
