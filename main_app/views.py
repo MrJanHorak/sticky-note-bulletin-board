@@ -64,7 +64,7 @@ def signup(request):
   if request.method == 'POST':
     form = ExtendedUserCreationForm(request.POST)
     # profile_form = ProfileForm(request.POST)
-    if form.is_valid() and profile_form.is_valid():
+    if form.is_valid():
       user = form.save()
       # profile = profile_form.save(commit=False)
       # profile.user = user
@@ -76,8 +76,8 @@ def signup(request):
       return redirect('notes_index')
   else:
     form = ExtendedUserCreationForm()
-    profile_form = ProfileForm()
-  context = {'form': form, 'profile_form': profile_form}
+    # profile_form = ProfileForm()
+  context = {'form': form}
   return render(request, 'signup.html', context)
 
 def add_photo(request, note_id):

@@ -44,14 +44,19 @@ a:link {
   height: 225px;
 } */
 
-.wrapper1 {
-  width: 220px;
-  height: 390px;
-  background: #fff;
-  border-radius: 7px;
-  box-shadow: 5px 5px 7px rgba(33, 33, 33, 0.7);
+.wrapper1 svg {
+  /* display: none; */
+  /* width: 250px; */
+  /* height: 390px; */
+  /* background: #fff; */
+  /* border-radius: 7px; */
+  /* box-shadow: 5px 5px 7px rgba(33, 33, 33, 0.7); */
 }
-.wrapper1 header {
+
+.wrapper1 a {
+  /* display: none; */
+}
+/* .wrapper1 header {
   display: flex;
   text-align: center;
   font-size: 15px;
@@ -60,23 +65,23 @@ a:link {
   padding: 16px 15px;
   align-items: center;
   border-bottom: 1px solid #ccc;
-}
-header i {
+} */
+/* header i {
   font-size: 0em;
   cursor: pointer;
   margin-right: 8px;
-}
-.wrapper1.active header i {
+} */
+/* .wrapper1.active header i {
   margin-left: 5px;
   font-size: 20px;
-}
-.wrapper1 .input-part {
+} */
+/* .wrapper1 .input-part {
   margin: 20px 25px 30px;
-}
-.wrapper1.active .input-part {
+} */
+/* .wrapper1.active .input-part {
   display: none;
-}
-.input-part .info-txt {
+} */
+/* .input-part .info-txt {
   display: none;
   font-size: 17px;
   text-align: center;
@@ -141,15 +146,15 @@ header i {
 }
 .input-part button:hover {
   background: #1d9ffc;
-}
-.wrapper1 .weather-part {
+} */
+/* .wrapper1 .weather-part {
   display: none;
   margin: 30px 0 0;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-}
-.wrapper1.active .weather-part {
+} */
+/* .wrapper1.active .weather-part {
   display: flex;
 }
 .weather-part img {
@@ -225,7 +230,7 @@ header i {
 }
 .humidity i {
   font-size: 37px;
-}
+} */
 
 .draggable {
   float: left;
