@@ -99,7 +99,7 @@ def add_photo(request, note_id):
 
 class NoteCreate(LoginRequiredMixin, CreateView):
   model = Note
-  fields = ['name', 'notetype', 'content', 'date', 'color', 'homescreen']
+  fields = ['name', 'notetype', 'content', 'date', 'color', 'homescreen', 'vocab', 'photocard_caption', 'to_do']
   success_url = '/notes/'
 
   def form_valid(self, form):

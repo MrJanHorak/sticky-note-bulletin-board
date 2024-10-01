@@ -1,4 +1,7 @@
-{% extends 'base.html' %} {% load static %} {% block head %}
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
 <link
   href="https://cdn.jsdelivr.net/npm/mc-datepicker/dist/mc-calendar.min.css"
   rel="stylesheet"
@@ -7,23 +10,95 @@
 <script src="https://cdn.jsdelivr.net/npm/mc-datepicker/dist/mc-calendar.min.js"></script>
 <link rel="stylesheet" type="text/css" href="{% static 'css/form.css' %}" />
 <script defer src="{% static 'js/note-create.js' %}"></script>
-{% endblock %} {% block content %}
+{% endblock %}
+
+{% block content %}
 <div id="note-form">
   <div id="form-container">
     {% if object %}
-    <h1>Edit {{object.name}}</h1>
+      <h1>Edit {{ object.name }}</h1>
     {% else %}
-    <h1>Add a Note</h1>
+      <h1>Add a Note</h1>
     {% endif %}
 
     <form action="" method="post" class="form-container">
       {% csrf_token %}
 
       <table>
-        {% comment %} Render the inputs inside of
         <tr>
-          s &
-          <td>s {% endcomment %} {{ form.as_table }}</td>
+          <th>Note Type:</th>
+          <td>
+            {{ form.notetype }}
+          </td>
+        </tr>
+
+        <tr>
+          <th>Name:</th>
+          <td>
+            {{ form.name }}
+          </td>
+        </tr>
+
+        {% if object and object.notetype == 'L' %}
+          <tr>
+            <th>Word to Learn:</th>
+            <td>
+              {{ form.vocab }}
+            </td>
+          </tr>
+          <tr>
+            <th>Definition:</th>
+            <td>
+              {{ form.definition }}
+            </td>
+          </tr>
+        {% endif %}
+
+        {% if object and object.notetype == 'P' %}
+          <tr>
+            <th>Photocard Caption:</th>
+            <td>
+              {{ form.photocard_caption }}
+            </td>
+          </tr>
+        {% endif %}
+
+        <tr>
+          <th>Content:</th>
+          <td>
+            {{ form.content }}
+          </td>
+        </tr>
+
+        <tr>
+          <th>Due Date:</th>
+          <td>
+            {{ form.date }}
+          </td>
+        </tr>
+
+        <tr>
+          <th>Color:</th>
+          <td>
+            {{ form.color }}
+          </td>
+        </tr>
+
+        <tr>
+          <th>Homescreen:</th>
+          <td>
+            {{ form.homescreen }}
+          </td>
+        </tr>
+
+        <tr>
+          <th>To-Do List:</th>
+          <td>
+            {{ to_do_form.as_p }}
+
+            <br />
+            {{ to_do_form.new_todo }}
+          </td>
         </tr>
       </table>
 

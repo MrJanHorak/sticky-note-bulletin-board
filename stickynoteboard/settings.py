@@ -9,14 +9,13 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
+from pathlib import Path
 
 import os
 import environ
-import dj_database_url
-env = environ.Env()
-environ.Env.read_env()
 
-from pathlib import Path
+environ.Env()
+environ.Env.read_env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -33,7 +32,6 @@ DEBUG = os.getenv('DEBUG', '0').lower() in ['true', 't', '1']
 DEBUG_PROPAGATE_EXCEPTIONS = True
 
 ALLOWED_HOSTS = ["*"]
-
 
 # Application definition
 
