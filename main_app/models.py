@@ -44,7 +44,7 @@ class Note(models.Model):
         models.CharField(max_length=100, blank=True), blank=True, null=True
     )
     content = models.TextField(max_length=400, blank=True)
-    date = models.DateField("Due date")
+    date = models.DateField("Due date", blank=True, null=True)
     color = models.CharField(max_length=7, choices=COLOR, default=COLOR[2][0])
     homescreen = models.CharField(
         max_length=1, choices=HOMESCREEN, default=HOMESCREEN[1][0]

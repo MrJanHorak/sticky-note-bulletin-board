@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Select Note Type</h2>
+<form method="post">
+  {% csrf_token %}
+  <label for="note_type">Choose a note type:</label>
+  <select id="note_type" name="note_type">
+    <option value="T">To-Do</option>
+    <option value="R">Reminder</option>
+    <option value="L">Vocab/Learning</option>
+    <option value="P">Photocard</option>
+  </select>
+  <button type="submit">Next</button>
+</form>
+{% endblock %}

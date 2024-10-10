@@ -157,6 +157,16 @@ select option[value="#BEBEBE"] {
   border: 0.5px solid #e7cd65;
 }
 
+#id_to_do {
+  margin-top: 10px;
+  width: 100px;
+  background-color: #e7cd65;
+  border-radius: 4px;
+  height: 2em;
+  font-family: inherit;
+  border: 0.5px solid #e7cd65;
+}
+
 #id_color {
   margin-top: 10px;
   width: 100px;

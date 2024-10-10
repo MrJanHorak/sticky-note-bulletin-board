@@ -14,7 +14,34 @@
   <div class="note-details">
     <h1>{{ note.name }}</h1>
     <p>{{ note.content }}</p>
-   {% if note.user == request.user %}
+
+    {% if note.notetype == 'L' %}
+    <div class="vocab-section">
+      <h2>Vocabulary</h2>
+      <pre>{{ note.vocab|json_script:"vocab-data" }}</pre>
+    </div>
+    {% elif note.notetype == 'P' %}
+    <div class="photocard-section">
+      <h2>Photocard Caption</h2>
+      <p>{{ note.photocard_caption }}</p>
+    </div>
+    {% elif note.notetype == 'T' %}
+    <div class="todo-section">
+      <h2>To-Do List</h2>
+      <ul>
+        {% for item in note.to_do %}
+        <li>{{ item }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% elif note.notetype == 'R' %}
+    <div class="reminder-section">
+      <h2>Reminder</h2>
+      <p>{{ note.date }}</p>
+    </div>
+    {% endif %}
+
+    {% if note.user == request.user %}
     <p id="file-name"></p>
     <form action="{% url 'add_photo' note.id %}" enctype="multipart/form-data" method="POST">
       {% csrf_token %}

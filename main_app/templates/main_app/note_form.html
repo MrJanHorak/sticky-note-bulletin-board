@@ -1,7 +1,4 @@
-{% extends 'base.html' %}
-{% load static %}
-
-{% block head %}
+{% extends 'base.html' %} {% load static %} {% block head %}
 <link
   href="https://cdn.jsdelivr.net/npm/mc-datepicker/dist/mc-calendar.min.css"
   rel="stylesheet"
@@ -10,100 +7,57 @@
 <script src="https://cdn.jsdelivr.net/npm/mc-datepicker/dist/mc-calendar.min.js"></script>
 <link rel="stylesheet" type="text/css" href="{% static 'css/form.css' %}" />
 <script defer src="{% static 'js/note-create.js' %}"></script>
-{% endblock %}
-
-{% block content %}
+{% endblock %} {% block content %}
 <div id="note-form">
   <div id="form-container">
     {% if object %}
-      <h1>Edit {{ object.name }}</h1>
+    <h1>Edit {{ object.name }}</h1>
     {% else %}
-      <h1>Add a Note</h1>
+    <h1>Add a Note</h1>
     {% endif %}
 
     <form action="" method="post" class="form-container">
       {% csrf_token %}
-
       <table>
         <tr>
-          <th>Note Type:</th>
-          <td>
-            {{ form.notetype }}
-          </td>
+          <td>{{ form.name.label_tag }}</td>
+          <td>{{ form.name }}</td>
         </tr>
-
         <tr>
-          <th>Name:</th>
-          <td>
-            {{ form.name }}
-          </td>
+          <td>{{ form.notetype.label_tag }}</td>
+          <td>{{ form.notetype }}</td>
         </tr>
-
-        {% if object and object.notetype == 'L' %}
-          <tr>
-            <th>Word to Learn:</th>
-            <td>
-              {{ form.vocab }}
-            </td>
-          </tr>
-          <tr>
-            <th>Definition:</th>
-            <td>
-              {{ form.definition }}
-            </td>
-          </tr>
-        {% endif %}
-
-        {% if object and object.notetype == 'P' %}
-          <tr>
-            <th>Photocard Caption:</th>
-            <td>
-              {{ form.photocard_caption }}
-            </td>
-          </tr>
-        {% endif %}
-
         <tr>
-          <th>Content:</th>
-          <td>
-            {{ form.content }}
-          </td>
+          <td>{{ form.color.label_tag }}</td>
+          <td>{{ form.color }}</td>
         </tr>
-
         <tr>
-          <th>Due Date:</th>
-          <td>
-            {{ form.date }}
-          </td>
+          <td>{{ form.homescreen.label_tag }}</td>
+          <td>{{ form.homescreen }}</td>
         </tr>
-
         <tr>
-          <th>Color:</th>
-          <td>
-            {{ form.color }}
-          </td>
-        </tr>
-
-        <tr>
-          <th>Homescreen:</th>
-          <td>
-            {{ form.homescreen }}
-          </td>
-        </tr>
-
-        <tr>
-          <th>To-Do List:</th>
-          <td>
-            {{ to_do_form.as_p }}
-
-            <br />
-            {{ to_do_form.new_todo }}
-          </td>
+          <td>{{ form.date.label_tag }}</td>
+          <td>{{ form.date }}</td>
         </tr>
       </table>
-
+      <div id="vocab-fields" style="display: none">
+        <label for="id_vocab">Vocab:</label>
+        {{ form.vocab }}
+      </div>
+      <div id="photocard-fields" style="display: none">
+        <label for="id_photocard_caption">Photocard Caption:</label>
+        {{ form.photocard_caption }}
+      </div>
+      <div id="content-field" style="display: none">
+        <label for="id_content">Content:</label>
+        {{ form.content }}
+      </div>
+      <div id="to-do-field" style="display: none">
+        <label for="id_to_do">To-Do:</label>
+        {{ form.to_do }}
+      </div>
       <div id="button-container">
-        <button type="submit" class="button-32">Submit!</button>
+        <button type="submit" id="submit" class="button-32">Submit!</button>
         <input
           type="button"
           class="button-32"
@@ -112,6 +66,80 @@
         />
       </div>
     </form>
+
+    {% if form.errors %}
+    <div class="form-errors">
+      <ul>
+        {% for field in form %} {% for error in field.errors %}
+        <li>{{ field.label }}: {{ error }}</li>
+        {% endfor %} {% endfor %} {% for error in form.non_field_errors %}
+        <li>{{ error }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
   </div>
 </div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const notetypeField = document.querySelector('#id_notetype')
+    const vocabFields = document.querySelector('#vocab-fields')
+    const photocardFields = document.querySelector('#photocard-fields')
+    const contentField = document.querySelector('#content-field')
+    const toDoField = document.querySelector('#to-do-field')
+    const colorField = document.querySelector('#id_color')
+    const formContainer = document.querySelector('#note-form')
+    const inputFields = document.querySelectorAll('input, select, textarea')
+    const submitButton = document.querySelector('#submit');
+
+    if (!notetypeField) {
+      console.error('Note type field not found')
+      return
+    }
+
+    function toggleFields() {
+      const noteType = notetypeField.value
+      vocabFields.style.display = noteType === 'L' ? 'block' : 'none'
+      photocardFields.style.display = noteType === 'P' ? 'block' : 'none'
+      contentField.style.display = noteType === 'R' ? 'block' : 'none'
+      toDoField.style.display = noteType === 'T' ? 'block' : 'none'
+    }
+
+    function darkenColor(color, percent) {
+      const num = parseInt(color.slice(1), 16),
+        amt = Math.round(2.55 * percent),
+        R = (num >> 16) + amt,
+        G = ((num >> 8) & 0x00ff) + amt,
+        B = (num & 0x0000ff) + amt
+      return (
+        '#' +
+        (
+          0x1000000 +
+          (R < 255 ? (R < 1 ? 0 : R) : 255) * 0x10000 +
+          (G < 255 ? (G < 1 ? 0 : G) : 255) * 0x100 +
+          (B < 255 ? (B < 1 ? 0 : B) : 255)
+        )
+          .toString(16)
+          .slice(1)
+      )
+    }
+
+    function updateFormColor() {
+      const color = colorField.value
+      formContainer.style.backgroundColor = color
+      const darkerColor = darkenColor(color, -20)
+      inputFields.forEach((field) => {
+        field.style.backgroundColor = darkerColor
+      })
+      submitButton.style.backgroundColor = darkerColor;
+      submitButton.style.borderColor = color;
+    }
+
+    notetypeField.addEventListener('change', toggleFields)
+    colorField.addEventListener('input', updateFormColor)
+    toggleFields() // Initial call to set the correct state
+    updateFormColor() // Initial call to set the correct color
+  })
+</script>
 {% endblock %}

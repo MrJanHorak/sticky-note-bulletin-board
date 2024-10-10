@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-from .models import Profile
+from .models import Profile, Note
 
 class ExtendedUserCreationForm(UserCreationForm):
     email = forms.EmailField(required=True)
@@ -28,3 +28,12 @@ class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ('calendar_view', 'weather_view', 'background')
+
+class NoteForm(forms.ModelForm):
+    class Meta:
+        model = Note
+        fields = ['name', 'notetype', 'content', 'date', 'color', 'homescreen', 'vocab', 'photocard_caption', 'to_do']
+        widgets = {
+            'notetype': forms.Select(attrs={'id': 'id_notetype'}),
+            'date': forms.DateInput(attrs={'type': 'date'}),
+        }

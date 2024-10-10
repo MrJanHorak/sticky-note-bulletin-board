@@ -1,72 +1,54 @@
-{% extends 'base.html' %} {% load static %} {% load slugify %} {% block head %}
-<link
-  rel="stylesheet"
-  type="text/css"
-  href="{% static 'css/note-index.css' %}"
-/>
+{% extends 'base.html' %}
+{% load static %}
+{% load slugify %}
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/note-index.css' %}" />
 <link rel="stylesheet" type="text/css" href="{% static 'css/calendar.css' %}" />
 
-<script
-  src="https://code.jquery.com/jquery-2.2.4.min.js"
-  integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
-  crossorigin="anonymous"
-></script>
+<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.5.1/moment.min.js"></script>
 
 <script defer src="{% static 'js/draggability.js' %}"></script>
 <script defer src="{% static 'js/calendar.js' %}"></script>
-{% endblock %} {% block content %}
+{% endblock %}
+{% block content %}
 
 <section class="page-header"></section>
 
 <div class="grid" id="containment-wrapper">
   {% if background %}
-  <body
-    style="background-image: url({{ background }});"
-    style="background-repeat: repeat"
-    style="background-size: contain"
-  >
-    {% endif %} {% if weather == 'Y' %}
-    <div
-      id="draggable_0{{user.id}}"
-      class="wrapper1 stickynote draggable slide"
-    >
-      <script
-        src="https://static.elfsight.com/platform/platform.js"
-        async
-      ></script>
-      <div
-        class="elfsight-app-1b855c99-97a0-4aa6-a0f4-a802185128bf"
-        data-elfsight-app-lazy
-      ></div>
+  <body style="background-image: url({{ background }});" style="background-repeat: repeat" style="background-size: contain">
+    {% endif %}
+    {% if weather == 'Y' %}
+    <div id="draggable_0{{user.id}}" class="wrapper1 stickynote draggable slide">
+      <script src="https://static.elfsight.com/platform/platform.js" async></script>
+      <div class="elfsight-app-1b855c99-97a0-4aa6-a0f4-a802185128bf" data-elfsight-app-lazy></div>
     </div>
-    {% endif %} {% if calendar == "Y" %}
+    {% endif %}
+    {% if calendar == "Y" %}
     <div id="draggable_1{{user.id}}" class="calbod draggable slide">
       <div id="calendar"></div>
     </div>
-    {% endif %} {% for note in notes %}
+    {% endif %}
+    {% for note in notes %}
     <a href="{% url 'notes_detail' note.id %}">
-      <div
-        class="stickynote draggable slide"
-        id="draggable_{{note.id }}"
-        style="background-color: {{ note.color }} "
-      >
+      <div class="stickynote draggable slide" id="draggable_{{note.id }}" style="background-color: {{ note.color }} ">
         <div class="stickynote-content">
           <div class="stickynote-img-container">
             {% if note.photo.url %}
-            <img
-              src="{{note.photo.url}}"
-              alt="A photo for {{note.name}}"
-              class="usr-img"
-            />
+            <img src="{{note.photo.url}}" alt="A photo for {{note.name}}" class="usr-img" />
             {% endif %}
           </div>
           <h3 class="stickynote-title">{{ note.name }}</h3>
           <p><small>{{ note.content }}</small></p>
+          {% if note.notetype == 'T' or note.notetype == 'R' %}
+          <p><small>{{ note.date }}</small></p>
+          {% endif %}
         </div>
       </div>
     </a>
-    {% endfor %} {% endblock %}
+    {% endfor %}
   </body>
 </div>
+{% endblock %}
