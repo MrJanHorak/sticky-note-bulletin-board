@@ -20,50 +20,6 @@ select option {
   text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
 }
 
-select option[value="#EAEC40"] {
-  background: #eaec40;
-}
-
-select option[value="#FF7EB9"] {
-  background: #ff7eb9;
-}
-
-select option[value="#F275AD"] {
-  background: #f275ad;
-}
-
-select option[value="#79CBC5"] {
-  background: #79cbc5;
-}
-
-select option[value="#FFFF97"] {
-  background: #ffff97;
-}
-
-select option[value="#7AFCFF"] {
-  background: #7afcff;
-}
-
-select option[value="#FBAE4A"] {
-  background: #fbae4a;
-}
-
-select option[value="#F3858E"] {
-  background: #f3858e;
-}
-
-select option[value="#8D9440"] {
-  background: #8d9440;
-}
-
-select option[value="#FFFFFF"] {
-  background: #ffffff;
-}
-
-select option[value="#BEBEBE"] {
-  background: #bebebe;
-}
-
 .button-32 {
   margin-top: 10px;
   background-color: #e7cd65;

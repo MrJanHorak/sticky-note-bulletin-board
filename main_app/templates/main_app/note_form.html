@@ -1,4 +1,6 @@
-{% extends 'base.html' %} {% load static %} {% block head %}
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
 <link
   href="https://cdn.jsdelivr.net/npm/mc-datepicker/dist/mc-calendar.min.css"
   rel="stylesheet"
@@ -7,7 +9,8 @@
 <script src="https://cdn.jsdelivr.net/npm/mc-datepicker/dist/mc-calendar.min.js"></script>
 <link rel="stylesheet" type="text/css" href="{% static 'css/form.css' %}" />
 <script defer src="{% static 'js/note-create.js' %}"></script>
-{% endblock %} {% block content %}
+{% endblock %}
+{% block content %}
 <div id="note-form">
   <div id="form-container">
     {% if object %}
@@ -20,16 +23,17 @@
       {% csrf_token %}
       <table>
         <tr>
-          <td>{{ form.name.label_tag }}</td>
-          <td>{{ form.name }}</td>
-        </tr>
-        <tr>
           <td>{{ form.notetype.label_tag }}</td>
           <td>{{ form.notetype }}</td>
         </tr>
         <tr>
           <td>{{ form.color.label_tag }}</td>
           <td>{{ form.color }}</td>
+        </tr>
+        </tr>
+        <tr>
+          <td>{{ form.font_color.label_tag }}</td>
+          <td>{{ form.font_color }}</td>
         </tr>
         <tr>
           <td>{{ form.homescreen.label_tag }}</td>
@@ -38,6 +42,10 @@
         <tr>
           <td>{{ form.date.label_tag }}</td>
           <td>{{ form.date }}</td>
+        </tr>
+        <tr>
+          <td>{{ form.name.label_tag }}</td>
+          <td>{{ form.name }}</td>
         </tr>
       </table>
       <div id="vocab-fields" style="display: none">
@@ -83,63 +91,86 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', function () {
-    const notetypeField = document.querySelector('#id_notetype')
-    const vocabFields = document.querySelector('#vocab-fields')
-    const photocardFields = document.querySelector('#photocard-fields')
-    const contentField = document.querySelector('#content-field')
-    const toDoField = document.querySelector('#to-do-field')
-    const colorField = document.querySelector('#id_color')
-    const formContainer = document.querySelector('#note-form')
-    const inputFields = document.querySelectorAll('input, select, textarea')
-    const submitButton = document.querySelector('#submit');
+    const notetypeField = document.querySelector('#id_notetype');
+    const vocabFields = document.querySelector('#vocab-fields');
+    const photocardFields = document.querySelector('#photocard-fields');
+    const contentField = document.querySelector('#content-field');
+    const toDoField = document.querySelector('#to-do-field');
+    const colorField = document.querySelector('#id_color');
+    const fontColorField = document.querySelector('#id_font_color');
+    const formContainer = document.querySelector('#note-form');
+    const inputFields = document.querySelectorAll('input, textarea, select');
+    const submitButton = document.querySelector('button[type="submit"]');
 
     if (!notetypeField) {
-      console.error('Note type field not found')
-      return
+      console.error('Note type field not found');
+      return;
     }
 
     function toggleFields() {
-      const noteType = notetypeField.value
-      vocabFields.style.display = noteType === 'L' ? 'block' : 'none'
-      photocardFields.style.display = noteType === 'P' ? 'block' : 'none'
-      contentField.style.display = noteType === 'R' ? 'block' : 'none'
-      toDoField.style.display = noteType === 'T' ? 'block' : 'none'
+      const noteType = notetypeField.value;
+      vocabFields.style.display = noteType === 'L' ? 'block' : 'none';
+      photocardFields.style.display = noteType === 'P' ? 'block' : 'none';
+      contentField.style.display = noteType === 'R' ? 'block' : 'none';
+      toDoField.style.display = noteType === 'T' ? 'block' : 'none';
     }
 
     function darkenColor(color, percent) {
       const num = parseInt(color.slice(1), 16),
         amt = Math.round(2.55 * percent),
         R = (num >> 16) + amt,
-        G = ((num >> 8) & 0x00ff) + amt,
-        B = (num & 0x0000ff) + amt
-      return (
-        '#' +
-        (
-          0x1000000 +
-          (R < 255 ? (R < 1 ? 0 : R) : 255) * 0x10000 +
-          (G < 255 ? (G < 1 ? 0 : G) : 255) * 0x100 +
-          (B < 255 ? (B < 1 ? 0 : B) : 255)
-        )
-          .toString(16)
-          .slice(1)
-      )
+        G = (num >> 8 & 0x00FF) + amt,
+        B = (num & 0x0000FF) + amt;
+      return '#' + (
+        0x1000000 +
+        (R < 255 ? (R < 1 ? 0 : R) : 255) * 0x10000 +
+        (G < 255 ? (G < 1 ? 0 : G) : 255) * 0x100 +
+        (B < 255 ? (B < 1 ? 0 : B) : 255)
+      ).toString(16).slice(1).toUpperCase();
+    }
+
+    function getContrastYIQ(hexcolor) {
+      const r = parseInt(hexcolor.substr(1, 2), 16);
+      const g = parseInt(hexcolor.substr(3, 2), 16);
+      const b = parseInt(hexcolor.substr(5, 2), 16);
+      const yiq = ((r * 299) + (g * 587) + (b * 114)) / 1000;
+      return (yiq <= 225) ? '#FFFFFF' : '#000000';
     }
 
     function updateFormColor() {
-      const color = colorField.value
-      formContainer.style.backgroundColor = color
-      const darkerColor = darkenColor(color, -20)
+      const color = colorField.value;
+      const fontColor = fontColorField.value;
+      formContainer.style.backgroundColor = color;
+      formContainer.style.color = fontColor
+      const darkerColor = darkenColor(color, -20);
       inputFields.forEach((field) => {
-        field.style.backgroundColor = darkerColor
-      })
+        field.style.backgroundColor = darkerColor;
+        field.style.color = fontColor;
+      });
       submitButton.style.backgroundColor = darkerColor;
       submitButton.style.borderColor = color;
+      submitButton.style.color = fontColor;
     }
 
-    notetypeField.addEventListener('change', toggleFields)
-    colorField.addEventListener('input', updateFormColor)
-    toggleFields() // Initial call to set the correct state
-    updateFormColor() // Initial call to set the correct color
-  })
+    function setOptionColors() {
+      const options = colorField.querySelectorAll('option');
+      options.forEach(option => {
+        option.style.backgroundColor = option.value;
+        option.style.color = getContrastYIQ(option.value);
+      });
+      const fontOptions = fontColorField.querySelectorAll('option');
+      fontOptions.forEach(option => {
+        option.style.backgroundColor = option.value;
+        option.style.color = getContrastYIQ(option.value);
+      });
+    }
+
+    notetypeField.addEventListener('change', toggleFields);
+    colorField.addEventListener('input', updateFormColor);
+    fontColorField.addEventListener('input', updateFormColor);
+    toggleFields(); // Initial call to set the correct state
+    updateFormColor(); // Initial call to set the correct color
+    setOptionColors(); // Initial call to set the option colors
+  });
 </script>
 {% endblock %}

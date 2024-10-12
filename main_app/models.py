@@ -12,6 +12,34 @@ NOTETYPE = (
 )
 
 COLOR = (
+    ("#C0C0C0", "Silver"),        # 1920s Art Deco
+    ("#8B5A2B", "Sienna"),        # 1920s
+    ("#3B444B", "Payne's Grey"),  # 1920s
+    ("#FFDAB9", "Peach Puff"),    # 1950s
+    ("#FF6347", "Tomato"),        # 1950s
+    ("#FF69B4", "Hot Pink"),      # 1950s
+    ("#FF4500", "Orange Red"),    # 1960s
+    ("#FFFF66", "Light Yellow"),  # 1960s
+    ("#FFB6C1", "Light Pink"),    # 1960s
+    ("#8B4513", "Saddle Brown"),  # 1970s
+    ("#D2B48C", "Tan"),           # 1970s
+    ("#DEB887", "Burly Wood"),    # 1970s
+    ("#FF00FF", "Magenta"),       # 1980s
+    ("#00FFFF", "Cyan"),          # 1980s
+    ("#FFD700", "Neon Gold"),     # 1980s
+    ("#808080", "Cool Grey"),     # 1990s
+    ("#CD5C5C", "Indian Red"),    # 1990s
+    ("#4682B4", "Steel Blue"),    # 1990s
+    ("#000000", "Black"),         
+    ("#FF0000", "Red"),           
+    ("#0000FF", "Royal Blue"),    
+    ("#228B22", "Forest Green"),  
+    ("#FFA500", "Orange"),        
+    ("#FF4500", "Red Orange"),    
+    ("#9932CC", "Dark Orchid"),   
+    ("#8B4513", "Saddle Brown"),  
+    ("#FFD700", "Gold"),          
+    ("#708090", "Slate Grey"), 
     ("#EAEC40", "Dandelion"),
     ("#FF7EB9", "Pink"),
     ("#F275AD", "Cyclamen"),
@@ -45,13 +73,14 @@ class Note(models.Model):
     )
     content = models.TextField(max_length=400, blank=True)
     date = models.DateField("Due date", blank=True, null=True)
-    color = models.CharField(max_length=7, choices=COLOR, default=COLOR[2][0])
+    color = models.CharField(max_length=7, choices=COLOR, default=COLOR[0][0])
+    font_color = models.CharField("Ink Color", max_length=7, choices=COLOR, default=COLOR[2][0])
     homescreen = models.CharField(
         max_length=1, choices=HOMESCREEN, default=HOMESCREEN[1][0]
     )
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    vocab = models.JSONField(blank=True, null=True)  # For Vocab/Learning
-    photocard_caption = models.CharField(max_length=255, blank=True)  # For Photocard
+    vocab = models.JSONField(blank=True, null=True)
+    photocard_caption = models.CharField(max_length=255, blank=True)
 
     def __str__(self):
         return self.name

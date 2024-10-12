@@ -132,16 +132,8 @@ class NoteCreate(LoginRequiredMixin, CreateView):
     template_name = "main_app/note_form.html"
     success_url = "/notes/"
 
-    def get_initial(self):
-        initial = super().get_initial()
-        note_type = self.request.GET.get("type")
-        if note_type:
-            initial["notetype"] = note_type
-        return initial
-
     def form_valid(self, form):
         form.instance.user = self.request.user
-        form.instance.notetype = self.request.GET.get("type")
         return super().form_valid(form)
 
     def form_invalid(self, form):

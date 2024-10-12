@@ -32,7 +32,7 @@ class ProfileForm(forms.ModelForm):
 class NoteForm(forms.ModelForm):
     class Meta:
         model = Note
-        fields = ['name', 'notetype', 'content', 'date', 'color', 'homescreen', 'vocab', 'photocard_caption', 'to_do']
+        fields = ['name', 'notetype', 'content', 'date', 'color', 'font_color','homescreen', 'vocab', 'photocard_caption', 'to_do']
         widgets = {
             'notetype': forms.Select(attrs={'id': 'id_notetype'}),
             'date': forms.DateInput(attrs={'type': 'date'}),
