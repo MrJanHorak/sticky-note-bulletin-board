@@ -48,30 +48,17 @@
           <td>{{ form.name }}</td>
         </tr>
       </table>
-      <div id="vocab-fields" style="display: none">
-        <label for="id_vocab">Vocab:</label>
-        {{ form.vocab }}
+  <h3>Vocabulary Entries</h3>
+      {{ vocab_entries.management_form }}
+      {% for form in vocab_entries %}
+      <div class="vocab-entry">
+        {{ form.word.label_tag }} {{ form.word }}
+        {{ form.meaning.label_tag }} {{ form.meaning }}
       </div>
-      <div id="photocard-fields" style="display: none">
-        <label for="id_photocard_caption">Photocard Caption:</label>
-        {{ form.photocard_caption }}
-      </div>
-      <div id="content-field" style="display: none">
-        <label for="id_content">Content:</label>
-        {{ form.content }}
-      </div>
-      <div id="to-do-field" style="display: none">
-        <label for="id_to_do">To-Do:</label>
-        {{ form.to_do }}
-      </div>
+      {% endfor %}
       <div id="button-container">
-        <button type="submit" id="submit" class="button-32">Submit!</button>
-        <input
-          type="button"
-          class="button-32"
-          value="Go back!"
-          onclick="history.back()"
-        />
+        <button type="submit" class="button-32">Submit!</button>
+        <input type="button" class="button-32" value="Go back!" onclick="history.back()" />
       </div>
     </form>
 

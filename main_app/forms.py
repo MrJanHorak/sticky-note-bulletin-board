@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-from .models import Profile, Note
+from .models import Profile, Note, VocabularyEntry
 
 class ExtendedUserCreationForm(UserCreationForm):
     email = forms.EmailField(required=True)
@@ -29,10 +29,25 @@ class ProfileForm(forms.ModelForm):
         model = Profile
         fields = ('calendar_view', 'weather_view', 'background')
 
+class VocabularyEntryForm(forms.ModelForm):
+    class Meta:
+        model = VocabularyEntry
+        fields = ['word', 'meaning']
+
 class NoteForm(forms.ModelForm):
     class Meta:
         model = Note
-        fields = ['name', 'notetype', 'content', 'date', 'color', 'font_color','homescreen', 'vocab', 'photocard_caption', 'to_do']
+        fields = [
+            "name",
+            "notetype",
+            "content",
+            "date",
+            "color",
+            "font_color",
+            "homescreen",
+            "photocard_caption",
+            "to_do",
+        ]
         widgets = {
             'notetype': forms.Select(attrs={'id': 'id_notetype'}),
             'date': forms.DateInput(attrs={'type': 'date'}),

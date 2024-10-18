@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
-from .models import Note, Photo, Profile
+from .models import Note, Photo, Profile, VocabularyEntry
 from django.views.generic import ListView, DetailView
+from django.forms import inlineformset_factory
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -9,12 +10,14 @@ from django.contrib.auth.views import LoginView
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponseForbidden
 from django.urls import reverse_lazy, reverse
-from .forms import ExtendedUserCreationForm, ProfileForm, NoteForm
+from .forms import ExtendedUserCreationForm, ProfileForm, NoteForm, VocabularyEntryForm
 import uuid
 import boto3
 
 S3_BASE_URL = "https://s3.us-east-1.amazonaws.com/"
 BUCKET = "sicky-note-board-image-bucket"
+
+VocabularyEntryFormSet = inlineformset_factory(Note, VocabularyEntry, form=VocabularyEntryForm, extra=1, can_delete=True)
 
 
 # Create your views here.
@@ -132,8 +135,21 @@ class NoteCreate(LoginRequiredMixin, CreateView):
     template_name = "main_app/note_form.html"
     success_url = "/notes/"
 
+    def get_context_data(self, **kwargs):
+        data = super().get_context_data(**kwargs)
+        if self.request.POST:
+            data['vocab_entries'] = VocabularyEntryFormSet(self.request.POST)
+        else:
+            data['vocab_entries'] = VocabularyEntryFormSet()
+        return data
+
     def form_valid(self, form):
-        form.instance.user = self.request.user
+        context = self.get_context_data()
+        vocab_entries = context['vocab_entries']
+        self.object = form.save()
+        if vocab_entries.is_valid():
+            vocab_entries.instance = self.object
+            vocab_entries.save()
         return super().form_valid(form)
 
     def form_invalid(self, form):
@@ -145,37 +161,25 @@ class NoteCreate(LoginRequiredMixin, CreateView):
 
 class NoteUpdate(LoginRequiredMixin, UpdateView):
     model = Note
-    fields = [
-        "name",
-        "notetype",
-        "content",
-        "date",
-        "color",
-        "homescreen",
-        "vocab",
-        "photocard_caption",
-        "to_do",
-    ]
+    form_class = NoteForm
+    template_name = "main_app/note_form.html"
 
-    def get_object(self, queryset=None):
-        note = super().get_object(queryset)
-        if note.user != self.request.user:
-            raise HttpResponseForbidden("You are not allowed to edit this note.")
-        return note
-
-    def get_form(self, form_class=None):
-        form = super().get_form(form_class)
-        note = self.get_object()
-        if note.notetype == "L":
-            form.fields["vocab"].required = True
-            form.fields["photocard_caption"].widget = forms.HiddenInput()
-        elif note.notetype == "P":
-            form.fields["photocard_caption"].required = True
-            form.fields["vocab"].widget = forms.HiddenInput()
+    def get_context_data(self, **kwargs):
+        data = super().get_context_data(**kwargs)
+        if self.request.POST:
+            data['vocab_entries'] = VocabularyEntryFormSet(self.request.POST, instance=self.object)
         else:
-            form.fields["vocab"].widget = forms.HiddenInput()
-            form.fields["photocard_caption"].widget = forms.HiddenInput()
-        return form
+            data['vocab_entries'] = VocabularyEntryFormSet(instance=self.object)
+        return data
+
+    def form_valid(self, form):
+        context = self.get_context_data()
+        vocab_entries = context['vocab_entries']
+        self.object = form.save()
+        if vocab_entries.is_valid():
+            vocab_entries.instance = self.object
+            vocab_entries.save()
+        return super().form_valid(form)
 
 
 class NoteDelete(LoginRequiredMixin, DeleteView):
